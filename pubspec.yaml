@@ -1,0 +1,63 @@
+name: coffeeshopapp
+description: A new Flutter project.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.1.4 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  custom_navigation_bar: ^0.8.2
+  lottie: ^2.3.2
+  cupertino_icons: ^1.0.2
+  flutter_icons_null_safety: ^1.1.0
+  page_transition: ^2.0.9
+  animated_text_kit: ^4.2.2
+  shared_preferences: ^2.1.1
+  get_it: ^7.6.0
+  intl: ^0.18.1
+  flutter_bloc: ^8.1.3
+  bloc: ^8.1.2
+  hydrated_bloc: ^9.1.1
+  path_provider: ^2.0.15
+  firebase_core: ^2.24.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+flutter:
+
+  uses-material-design: true
+
+  
+  assets:
+    - assets/
+
+  fonts:
+    - family: Food Zone
+      fonts:
+        - asset: fonts/foodzone.ttf
+    - family: Coffee Crafts
+      fonts:
+        - asset: fonts/coffeecrafts.ttf
+    - family: Cafe Francoise
+      fonts:
+        - asset: fonts/cafefrancoise.otf
+    - family: Cartoonist
+      fonts:
+        - asset: fonts/cartoonist.ttf
+    - family: Keep Calm
+      fonts:
+        - asset: fonts/keepcalm.ttf
+    - family: League Spartan
+      fonts:
+        - asset: fonts/leaguespartan.ttf
+    - family: Mouse Memoirs
+      fonts:
+        - asset: fonts/mousememoirs.ttf
+
