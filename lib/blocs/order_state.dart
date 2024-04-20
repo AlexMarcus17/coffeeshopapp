@@ -10,20 +10,4 @@ class OrderList extends OrderState {
   OrderList({
     required this.list,
   });
-
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'list': list.map((x) => x.toMap()).toList(),
-    };
-  }
-
-  factory OrderList.fromMap(Map<String, dynamic> map) {
-    return OrderList(
-      list: List<Order>.from(
-        (map['list'] as List<dynamic>).map<Order>(
-          (x) => Order.fromMap(x as Map<String, dynamic>),
-        ),
-      ),
-    );
-  }
 }
