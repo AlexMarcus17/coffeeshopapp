@@ -1,10 +1,16 @@
 import 'dart:math';
 
+import 'package:coffeeshopapp/data/authrepo.dart';
+import 'package:coffeeshopapp/data/orderrepo.dart';
+import 'package:coffeeshopapp/models/order.dart';
+import 'package:email_validator/email_validator.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
+import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -15,7 +21,10 @@ class GetStartedScreen extends StatefulWidget {
 }
 
 class _GetStartedScreenState extends State<GetStartedScreen> {
+  bool isloading = false;
+  bool login = true;
   TextEditingController nameEditingController = TextEditingController();
+  TextEditingController emailEditingController = TextEditingController();
   TextEditingController passEditingController = TextEditingController();
   PageController pageController = PageController(initialPage: 0);
   int pagenum = 0;
@@ -213,147 +222,530 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
             height: 50,
             child: ElevatedButton(
               onPressed: () {
-                showGeneralDialog(
-                    barrierLabel: "",
-                    barrierDismissible: true,
-                    transitionDuration: Duration(milliseconds: 250),
-                    transitionBuilder:
-                        (context, animation, secondaryAnimation, child) {
-                      Tween<Offset> tween;
-                      tween =
-                          Tween(begin: const Offset(0, 1), end: Offset.zero);
-                      return SlideTransition(
-                        position: tween.animate(
-                          CurvedAnimation(
-                              parent: animation, curve: Curves.easeInOut),
-                        ),
-                        child: child,
-                      );
-                    },
-                    context: context,
-                    pageBuilder: (ctx, _, __) {
-                      return Container(
-                        decoration: BoxDecoration(
-                            color: Colors.amber,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(30))),
-                        padding: EdgeInsets.only(
-                          left: 60,
-                          right: 60,
-                          top: 30,
-                          bottom: 30,
-                        ),
-                        height: MediaQuery.of(context).size.height,
-                        child: Scaffold(
-                          resizeToAvoidBottomInset: false,
-                          backgroundColor: Colors.transparent,
-                          body: Stack(
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  FocusScope.of(context).unfocus();
-                                },
-                                child: Container(
-                                  color: Colors.transparent,
-                                  width: double.infinity,
-                                  height: double.infinity,
-                                ),
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) {
+                  return StatefulBuilder(
+                    builder: (ctx, setState2) => KeyboardDismisser(
+                      child: Scaffold(
+                        backgroundColor: Colors.amber,
+                        appBar: PreferredSize(
+                          preferredSize: Size.fromHeight(50),
+                          child: AppBar(
+                            backgroundColor: Color.fromARGB(0, 249, 153, 57),
+                            elevation: 0,
+                            centerTitle: true,
+                            title: ShaderMask(
+                              shaderCallback: (bounds) {
+                                return LinearGradient(colors: [
+                                  Color.fromARGB(255, 123, 55, 30),
+                                  Color.fromARGB(255, 182, 118, 54),
+                                  Color.fromARGB(255, 155, 77, 0)
+                                ]).createShader(bounds);
+                              },
+                              child: Text(
+                                "Mocha Moments",
+                                style: TextStyle(
+                                    fontFamily: "Food Zone",
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 24),
                               ),
-                              Positioned(
-                                left: 60,
-                                right: 60,
-                                bottom:
-                                    MediaQuery.of(context).size.height * 0.55,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      "Username",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Color.fromARGB(255, 60, 42, 4),
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                    SizedBox(height: 4),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: TextField(
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 16,
-                                        ),
-                                        decoration: InputDecoration(
-                                          hintText: "",
-                                          border: OutlineInputBorder(),
-                                          focusedBorder: OutlineInputBorder(),
-                                          prefixIcon: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 8),
-                                            child: Icon(
-                                                Icons.account_circle_sharp),
-                                          ),
-                                        ),
-                                        controller: nameEditingController,
-                                      ),
-                                    ),
-                                    SizedBox(height: 10),
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        if (nameEditingController.text
-                                            .trim()
-                                            .isNotEmpty) {
-                                          GetIt.I
-                                              .get<SharedPreferences>()
-                                              .setInt("tokens", 0);
-                                          GetIt.I
-                                              .get<SharedPreferences>()
-                                              .setBool("onlyvegan", false);
-                                          GetIt.I
-                                              .get<SharedPreferences>()
-                                              .setBool("isinit", false);
-                                          GetIt.I
-                                              .get<SharedPreferences>()
-                                              .setString(
-                                                  "username",
-                                                  nameEditingController.text
-                                                      .trim());
-                                          Navigator.of(context).pop();
-                                          Navigator.of(context)
-                                              .pushReplacementNamed(
-                                                  "/navigation2");
-                                        }
-                                      },
-                                      child: Text(
-                                        "Enter",
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            fontFamily: "Coffee Crafts"),
-                                      ),
-                                      style: ElevatedButton.styleFrom(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                        ),
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 15),
-                                        elevation: 30.0,
-                                        backgroundColor: Colors.brown,
-                                        shadowColor: Colors.amber,
-                                        foregroundColor: Colors.amber,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
                         ),
-                      );
-                    }).then((value) {
-                  nameEditingController.text = "";
-                });
+                        resizeToAvoidBottomInset: false,
+                        body: Stack(
+                          children: [
+                            Positioned(
+                              left: 60,
+                              right: 60,
+                              top: MediaQuery.of(context).size.height * 0.15,
+                              child: (!isloading)
+                                  ? login
+                                      ? Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              "Email Address",
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Color.fromARGB(
+                                                    255, 60, 42, 4),
+                                                fontSize: 16,
+                                              ),
+                                            ),
+                                            SizedBox(height: 4),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: TextField(
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 16,
+                                                ),
+                                                decoration: InputDecoration(
+                                                  hintText: "",
+                                                  border: OutlineInputBorder(),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(),
+                                                  prefixIcon: Padding(
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
+                                                        horizontal: 8),
+                                                    child: Icon(Icons.email),
+                                                  ),
+                                                ),
+                                                controller:
+                                                    emailEditingController,
+                                              ),
+                                            ),
+                                            Text(
+                                              "Password",
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Color.fromARGB(
+                                                    255, 60, 42, 4),
+                                                fontSize: 16,
+                                              ),
+                                            ),
+                                            SizedBox(height: 4),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: TextField(
+                                                obscureText: true,
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 16,
+                                                ),
+                                                decoration: InputDecoration(
+                                                  hintText: "",
+                                                  border: OutlineInputBorder(),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(),
+                                                  prefixIcon: Padding(
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
+                                                        horizontal: 8),
+                                                    child: Icon(Icons.password),
+                                                  ),
+                                                ),
+                                                controller:
+                                                    passEditingController,
+                                              ),
+                                            ),
+                                            SizedBox(height: 10),
+                                            ElevatedButton(
+                                              onPressed: () async {
+                                                if (!EmailValidator.validate(
+                                                    emailEditingController.text
+                                                        .trim())) {
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(SnackBar(
+                                                          content: Text(
+                                                              "Invalid Email Address")));
+                                                } else if (passEditingController
+                                                        .text
+                                                        .trim()
+                                                        .length <
+                                                    8) {
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(SnackBar(
+                                                          content: Text(
+                                                              "Invalid Password")));
+                                                } else {
+                                                  setState2(() {
+                                                    isloading = true;
+                                                  });
+                                                  bool success;
+                                                  String? message;
+                                                  (
+                                                    success,
+                                                    message
+                                                  ) = await GetIt.I
+                                                      .get<AuthRepository>()
+                                                      .signIn(
+                                                          emailEditingController
+                                                              .text
+                                                              .trim(),
+                                                          passEditingController
+                                                              .text
+                                                              .trim());
+                                                  int tokens = 0;
+                                                  if (success) {
+                                                    tokens = await GetIt.I
+                                                        .get<OrderRepository>()
+                                                        .getTokens();
+                                                  }
+                                                  setState2(() {
+                                                    isloading = false;
+                                                  });
+                                                  if (success) {
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(SnackBar(
+                                                            content: Text(
+                                                                "Sign In Successful")));
+                                                    GetIt.I
+                                                        .get<
+                                                            SharedPreferences>()
+                                                        .setInt(
+                                                            "tokens", tokens);
+                                                    GetIt.I
+                                                        .get<
+                                                            SharedPreferences>()
+                                                        .setBool(
+                                                            "onlyvegan", false);
+                                                    GetIt.I
+                                                        .get<
+                                                            SharedPreferences>()
+                                                        .setBool(
+                                                            "isinit", false);
+                                                    GetIt.I
+                                                        .get<
+                                                            SharedPreferences>()
+                                                        .setString(
+                                                            "username",
+                                                            GetIt.I
+                                                                .get<
+                                                                    AuthRepository>()
+                                                                .getName());
+                                                    Navigator.of(context).pop();
+                                                    Navigator.of(context)
+                                                        .pushReplacementNamed(
+                                                            "/navigation2");
+                                                  } else {
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(SnackBar(
+                                                            content: Text(
+                                                                message!)));
+                                                  }
+                                                }
+                                              },
+                                              child: Text(
+                                                "Log In",
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    fontFamily:
+                                                        "Coffee Crafts"),
+                                              ),
+                                              style: ElevatedButton.styleFrom(
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                ),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 15),
+                                                elevation: 30.0,
+                                                backgroundColor: Colors.brown,
+                                                shadowColor: Colors.amber,
+                                                foregroundColor: Colors.amber,
+                                              ),
+                                            ),
+                                            SizedBox(height: 10),
+                                            ElevatedButton(
+                                              onPressed: () {
+                                                setState2(() {
+                                                  login = false;
+                                                });
+                                              },
+                                              child: Text(
+                                                "or, Sign Up",
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    fontFamily:
+                                                        "Coffee Crafts"),
+                                              ),
+                                              style: ElevatedButton.styleFrom(
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                ),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 15),
+                                                elevation: 30.0,
+                                                backgroundColor: Colors.brown,
+                                                shadowColor: Colors.amber,
+                                                foregroundColor: Colors.amber,
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      : Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              "Username",
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Color.fromARGB(
+                                                    255, 60, 42, 4),
+                                                fontSize: 16,
+                                              ),
+                                            ),
+                                            SizedBox(height: 4),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: TextField(
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 16,
+                                                ),
+                                                decoration: InputDecoration(
+                                                  hintText: "",
+                                                  border: OutlineInputBorder(),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(),
+                                                  prefixIcon: Padding(
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
+                                                        horizontal: 8),
+                                                    child: Icon(Icons
+                                                        .account_circle_sharp),
+                                                  ),
+                                                ),
+                                                controller:
+                                                    nameEditingController,
+                                              ),
+                                            ),
+                                            Text(
+                                              "Email Address",
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Color.fromARGB(
+                                                    255, 60, 42, 4),
+                                                fontSize: 16,
+                                              ),
+                                            ),
+                                            SizedBox(height: 4),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: TextField(
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 16,
+                                                ),
+                                                decoration: InputDecoration(
+                                                  hintText: "",
+                                                  border: OutlineInputBorder(),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(),
+                                                  prefixIcon: Padding(
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
+                                                        horizontal: 8),
+                                                    child: Icon(Icons.email),
+                                                  ),
+                                                ),
+                                                controller:
+                                                    emailEditingController,
+                                              ),
+                                            ),
+                                            Text(
+                                              "Password",
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Color.fromARGB(
+                                                    255, 60, 42, 4),
+                                                fontSize: 16,
+                                              ),
+                                            ),
+                                            SizedBox(height: 4),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: TextField(
+                                                obscureText: true,
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 16,
+                                                ),
+                                                decoration: InputDecoration(
+                                                  hintText: "",
+                                                  border: OutlineInputBorder(),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(),
+                                                  prefixIcon: Padding(
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
+                                                        horizontal: 8),
+                                                    child: Icon(Icons.password),
+                                                  ),
+                                                ),
+                                                controller:
+                                                    passEditingController,
+                                              ),
+                                            ),
+                                            SizedBox(height: 10),
+                                            ElevatedButton(
+                                              onPressed: () async {
+                                                if (nameEditingController.text
+                                                        .trim()
+                                                        .length <
+                                                    3) {
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(SnackBar(
+                                                          content: Text(
+                                                              "Name must be at least 3 characters long")));
+                                                } else if (!EmailValidator
+                                                    .validate(
+                                                        emailEditingController
+                                                            .text
+                                                            .trim())) {
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(SnackBar(
+                                                          content: Text(
+                                                              "Invalid Email Address")));
+                                                } else if (passEditingController
+                                                        .text
+                                                        .trim()
+                                                        .length <
+                                                    8) {
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(SnackBar(
+                                                          content: Text(
+                                                              "Password must be at least 8 characters long")));
+                                                } else {
+                                                  setState2(() {
+                                                    isloading = true;
+                                                  });
+                                                  bool success;
+                                                  String? message;
+                                                  (
+                                                    success,
+                                                    message
+                                                  ) = await GetIt.I
+                                                      .get<AuthRepository>()
+                                                      .signUp(
+                                                          emailEditingController
+                                                              .text
+                                                              .trim(),
+                                                          passEditingController
+                                                              .text
+                                                              .trim(),
+                                                          nameEditingController
+                                                              .text
+                                                              .trim());
+                                                  if (success) {
+                                                    await GetIt.I
+                                                        .get<OrderRepository>()
+                                                        .updateTokens(0);
+                                                  }
+                                                  setState2(() {
+                                                    isloading = false;
+                                                  });
+                                                  if (success) {
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(SnackBar(
+                                                            content: Text(
+                                                                "Sign Up Successful")));
+                                                    GetIt.I
+                                                        .get<
+                                                            SharedPreferences>()
+                                                        .setInt("tokens", 0);
+                                                    GetIt.I
+                                                        .get<
+                                                            SharedPreferences>()
+                                                        .setBool(
+                                                            "onlyvegan", false);
+                                                    GetIt.I
+                                                        .get<
+                                                            SharedPreferences>()
+                                                        .setBool(
+                                                            "isinit", false);
+                                                    GetIt.I
+                                                        .get<
+                                                            SharedPreferences>()
+                                                        .setString(
+                                                            "username",
+                                                            nameEditingController
+                                                                .text
+                                                                .trim());
+                                                    Navigator.of(context).pop();
+                                                    Navigator.of(context)
+                                                        .pushReplacementNamed(
+                                                            "/navigation2");
+                                                  } else {
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(SnackBar(
+                                                            content: Text(
+                                                                message!)));
+                                                  }
+                                                }
+                                              },
+                                              child: Text(
+                                                "Sign Up",
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    fontFamily:
+                                                        "Coffee Crafts"),
+                                              ),
+                                              style: ElevatedButton.styleFrom(
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                ),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 15),
+                                                elevation: 30.0,
+                                                backgroundColor: Colors.brown,
+                                                shadowColor: Colors.amber,
+                                                foregroundColor: Colors.amber,
+                                              ),
+                                            ),
+                                            SizedBox(height: 10),
+                                            ElevatedButton(
+                                              onPressed: () {
+                                                setState2(() {
+                                                  login = true;
+                                                });
+                                              },
+                                              child: Text(
+                                                "or, Log In",
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    fontFamily:
+                                                        "Coffee Crafts"),
+                                              ),
+                                              style: ElevatedButton.styleFrom(
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                ),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 15),
+                                                elevation: 30.0,
+                                                backgroundColor: Colors.brown,
+                                                shadowColor: Colors.amber,
+                                                foregroundColor: Colors.amber,
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                  : Center(
+                                      child: CircularProgressIndicator(),
+                                    ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                }));
               },
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(

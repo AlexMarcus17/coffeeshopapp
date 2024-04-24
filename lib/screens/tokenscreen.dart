@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../blocs/cart_bloc.dart';
-import '../data/products.dart';
+import '../data/productrepo.dart';
 import '../widgets/rewarditem.dart';
 
 class TokenScreen extends StatefulWidget {
@@ -79,13 +79,13 @@ class _TokenScreenState extends State<TokenScreen> {
                         ),
                         itemBuilder: (context, id) {
                           return RewardItem(
-                              product: Products.getrewards(GetIt.I
+                              product: ProductRepository.getrewards(GetIt.I
                                       .get<SharedPreferences>()
                                       .getBool("onlyvegan") ??
                                   false)[id],
                               available: available);
                         },
-                        itemCount: Products.getrewards(GetIt.I
+                        itemCount: ProductRepository.getrewards(GetIt.I
                                     .get<SharedPreferences>()
                                     .getBool("onlyvegan") ??
                                 false)

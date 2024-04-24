@@ -1,6 +1,6 @@
 import '../models/product.dart';
 
-class Products {
+class ProductRepository {
   static List<Product> list = [
     Product(
         subtitle: "Intense Coffee Shot",
@@ -321,4 +321,6 @@ class Products {
               (element) => element.isreward == true && element.isvegan == true)
           .toList();
   }
+
+  static Future<void> up() async {}
 }

@@ -1,4 +1,4 @@
-import 'package:coffeeshopapp/data/products.dart';
+import 'package:coffeeshopapp/data/productrepo.dart';
 import 'package:coffeeshopapp/widgets/shopitem.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -254,14 +254,14 @@ class _ShopScreenState extends State<ShopScreen> {
                 ),
                 itemBuilder: (context, id) {
                   return ShopItem(
-                      product: Products.getbycategory(
+                      product: ProductRepository.getbycategory(
                           activecategory,
                           GetIt.I
                                   .get<SharedPreferences>()
                                   .getBool("onlyvegan") ??
                               false)[id]);
                 },
-                itemCount: Products.getbycategory(
+                itemCount: ProductRepository.getbycategory(
                         activecategory,
                         GetIt.I.get<SharedPreferences>().getBool("onlyvegan") ??
                             false)
