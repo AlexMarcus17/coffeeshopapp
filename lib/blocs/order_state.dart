@@ -6,7 +6,7 @@ part of 'order_bloc.dart';
 abstract class OrderState {}
 
 class OrderList extends OrderState {
-  List<Order> list;
+  final List<Order> list;
   OrderList({
     required this.list,
   });

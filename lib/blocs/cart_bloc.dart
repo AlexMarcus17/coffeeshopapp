@@ -74,7 +74,7 @@ class CartBloc extends HydratedBloc<CartEvent, CartState> {
     try {
       return CartList.fromMap(json);
     } on Exception catch (e) {
-      print(e);
+      return null;
     }
   }
 
@@ -83,7 +83,7 @@ class CartBloc extends HydratedBloc<CartEvent, CartState> {
     try {
       return (state as CartList).toMap();
     } on Exception catch (e) {
-      print(e);
+      return null;
     }
   }
 }

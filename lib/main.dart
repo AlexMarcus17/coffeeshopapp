@@ -3,6 +3,7 @@ import 'package:coffeeshopapp/data/authrepo.dart';
 import 'package:coffeeshopapp/data/orderrepo.dart';
 import 'package:coffeeshopapp/firebase_options.dart';
 import 'package:coffeeshopapp/routes/route.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -31,20 +32,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
-        BlocProvider<CartBloc>(
-          create: (BuildContext context) => CartBloc(),
-        ),
-        BlocProvider<OrderBloc>(
-          create: (BuildContext context) => OrderBloc(),
-        ),
-      ],
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(),
-        initialRoute: "/",
-        onGenerateRoute: RouteGenerator.onGenRoute,
-      ),
-    );
+        providers: [
+          BlocProvider<CartBloc>(
+            create: (BuildContext context) => CartBloc(),
+          ),
+          BlocProvider<OrderBloc>(
+            create: (BuildContext context) =>
+                OrderBloc(GetIt.I.get<OrderRepository>()),
+          ),
+        ],
+        child: MaterialApp(
+          title: 'Flutter Demo',
+          theme: ThemeData(),
+          initialRoute: "/",
+          onGenerateRoute: RouteGenerator.onGenRoute,
+        ));
   }
 }

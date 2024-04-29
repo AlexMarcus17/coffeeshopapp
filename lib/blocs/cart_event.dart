@@ -5,28 +5,28 @@ part of 'cart_bloc.dart';
 abstract class CartEvent {}
 
 class AddItem extends CartEvent {
-  CartProduct cartProduct;
+  final CartProduct cartProduct;
   AddItem({
     required this.cartProduct,
   });
 }
 
 class PlusItem extends CartEvent {
-  CartProduct cartProduct;
+  final CartProduct cartProduct;
   PlusItem({
     required this.cartProduct,
   });
 }
 
 class MinusItem extends CartEvent {
-  CartProduct cartProduct;
+  final CartProduct cartProduct;
   MinusItem({
     required this.cartProduct,
   });
 }
 
 class DeleteItem extends CartEvent {
-  CartProduct cartProduct;
+  final CartProduct cartProduct;
   DeleteItem({
     required this.cartProduct,
   });

@@ -36,12 +36,14 @@ class OrderRepository {
           .collection("users")
           .doc(authRepository.getUid())
           .get();
-      _tokens = data1.data()?["tokens"];
+      _tokens = data1.data()?["tokens"] ?? 0;
+
       var data2 = await FirebaseFirestore.instance
           .collection("users")
           .doc(authRepository.getUid())
           .collection("orders")
           .get();
+
       _orders = data2.docs.map((e) => Model.Order.fromMap(e.data())).toList();
     }
   }
@@ -56,9 +58,7 @@ class OrderRepository {
       await FirebaseFirestore.instance
           .collection("users")
           .doc(authRepository.getUid())
-          .update({
-        "tokens": tokens,
-      });
+          .set({"tokens": tokens});
       await updateOrders();
     }
   }

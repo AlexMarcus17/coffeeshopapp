@@ -784,122 +784,48 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-        stream: Connectivity().onConnectivityChanged,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Scaffold(
-              body: Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-          } else if (snapshot.data?[0] == ConnectivityResult.none) {
-            return Scaffold(
-              backgroundColor: Color.fromARGB(255, 237, 201, 154),
-              appBar: PreferredSize(
-                preferredSize: Size.fromHeight(50),
-                child: AppBar(
-                  backgroundColor: Color.fromARGB(0, 249, 153, 57),
-                  elevation: 0,
-                  centerTitle: true,
-                  title: ShaderMask(
-                    shaderCallback: (bounds) {
-                      return LinearGradient(colors: [
-                        Color.fromARGB(255, 123, 55, 30),
-                        Color.fromARGB(255, 182, 118, 54),
-                        Color.fromARGB(255, 155, 77, 0)
-                      ]).createShader(bounds);
-                    },
-                    child: Text(
-                      "Mocha Moments",
-                      style: TextStyle(
-                          fontFamily: "Food Zone",
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24),
-                    ),
-                  ),
-                ),
-              ),
-              body: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.wifi_off,
-                      size: 100,
-                      color: Colors.black,
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      "No Internet Connection",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      "Please check your internet connection",
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          } else {
-            return Scaffold(
-              backgroundColor: backgroundColor,
-              body: Column(
-                children: [
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    height: (MediaQuery.of(context).size.height -
-                            MediaQuery.of(context).viewInsets.top -
-                            MediaQuery.of(context).viewInsets.bottom) *
-                        0.8,
-                    child: PageView(
-                      controller: pageController,
-                      onPageChanged: (value) {
-                        setState(() {
-                          switch (value) {
-                            case 0:
-                              backgroundColor =
-                                  Color.fromARGB(255, 230, 153, 0);
-                              break;
-                            case 1:
-                              backgroundColor =
-                                  Color.fromARGB(255, 213, 125, 23);
-                              break;
-                            case 2:
-                              backgroundColor =
-                                  Color.fromARGB(255, 193, 167, 18);
-                              break;
-                          }
-                          pagenum = value;
-                        });
-                      },
-                      children: getpages(),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 40,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: buildindicators(),
-                  )
-                ],
-              ),
-            );
-          }
-        });
+    return Scaffold(
+      backgroundColor: backgroundColor,
+      body: Column(
+        children: [
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+            height: (MediaQuery.of(context).size.height -
+                    MediaQuery.of(context).viewInsets.top -
+                    MediaQuery.of(context).viewInsets.bottom) *
+                0.8,
+            child: PageView(
+              controller: pageController,
+              onPageChanged: (value) {
+                setState(() {
+                  switch (value) {
+                    case 0:
+                      backgroundColor = Color.fromARGB(255, 230, 153, 0);
+                      break;
+                    case 1:
+                      backgroundColor = Color.fromARGB(255, 213, 125, 23);
+                      break;
+                    case 2:
+                      backgroundColor = Color.fromARGB(255, 193, 167, 18);
+                      break;
+                  }
+                  pagenum = value;
+                });
+              },
+              children: getpages(),
+            ),
+          ),
+          SizedBox(
+            height: 40,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: buildindicators(),
+          )
+        ],
+      ),
+    );
   }
 }

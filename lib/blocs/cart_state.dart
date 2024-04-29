@@ -6,7 +6,7 @@ part of 'cart_bloc.dart';
 abstract class CartState {}
 
 class CartList extends CartState {
-  List<CartProduct> list;
+  final List<CartProduct> list;
   CartList({
     required this.list,
   });

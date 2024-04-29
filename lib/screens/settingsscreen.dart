@@ -73,11 +73,11 @@ class _SettingScreenState extends State<SettingScreen> {
                                         color: Colors.amber,
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(30))),
-                                    padding: EdgeInsets.only(
-                                        top: 30,
-                                        bottom: 30,
-                                        left: 60,
-                                        right: 60),
+                                    margin: EdgeInsets.only(
+                                        top: 150,
+                                        bottom: 220,
+                                        left: 20,
+                                        right: 20),
                                     height: MediaQuery.of(context).size.height,
                                     child: KeyboardDismisser(
                                       child: Scaffold(
@@ -103,7 +103,9 @@ class _SettingScreenState extends State<SettingScreen> {
                                               ),
                                               Padding(
                                                 padding:
-                                                    const EdgeInsets.all(8.0),
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 8,
+                                                        horizontal: 36),
                                                 child: TextField(
                                                   style: TextStyle(
                                                     color: Colors.black,
@@ -131,29 +133,44 @@ class _SettingScreenState extends State<SettingScreen> {
                                                 height: 10,
                                               ),
                                               ElevatedButton(
-                                                onPressed: () {
+                                                onPressed: () async {
                                                   if (textEditingController.text
-                                                      .trim()
-                                                      .isNotEmpty) {
-                                                    GetIt.I
-                                                        .get<
-                                                            SharedPreferences>()
-                                                        .setString(
+                                                          .trim()
+                                                          .length >
+                                                      2) {
+                                                    try {
+                                                      await GetIt.I
+                                                          .get<AuthRepository>()
+                                                          .changeName(
+                                                            textEditingController
+                                                                .text
+                                                                .trim(),
+                                                          );
+                                                      GetIt.I
+                                                          .get<
+                                                              SharedPreferences>()
+                                                          .setString(
                                                             "username",
                                                             textEditingController
                                                                 .text
-                                                                .trim());
-                                                    Navigator.of(context).pop();
-                                                    ScaffoldMessenger.of(
-                                                            context)
-                                                        .showSnackBar(SnackBar(
-                                                            content: Center(
-                                                              child: Text(
-                                                                  "Username changed"),
-                                                            ),
-                                                            duration: Duration(
-                                                                milliseconds:
-                                                                    800)));
+                                                                .trim(),
+                                                          );
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(
+                                                        SnackBar(
+                                                          content: Center(
+                                                            child: Text(
+                                                                "Username changed"),
+                                                          ),
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  800),
+                                                        ),
+                                                      );
+                                                    } catch (e) {}
                                                   }
                                                 },
                                                 child: Text(
@@ -176,6 +193,9 @@ class _SettingScreenState extends State<SettingScreen> {
                                                   shadowColor: Colors.amber,
                                                   foregroundColor: Colors.amber,
                                                 ),
+                                              ),
+                                              SizedBox(
+                                                height: 90,
                                               )
                                             ]),
                                       ),

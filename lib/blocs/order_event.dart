@@ -5,8 +5,12 @@ part of 'order_bloc.dart';
 abstract class OrderEvent {}
 
 class AddOrder extends OrderEvent {
-  Order order;
+  final Order order;
+  final int tokens;
   AddOrder({
     required this.order,
+    required this.tokens,
   });
 }
+
+class FetchOrders extends OrderEvent {}

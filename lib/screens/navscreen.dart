@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:get_it/get_it.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class NavigationScreen extends StatefulWidget {
   @override
@@ -21,7 +23,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
     return StreamBuilder(
         stream: Connectivity().onConnectivityChanged,
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
+          if (snapshot.data == null) {
             return Scaffold(
               body: Center(
                 child: CircularProgressIndicator(),

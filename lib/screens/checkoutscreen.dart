@@ -49,12 +49,13 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
           lottie = Lottie.asset("assets/completed.json");
         });
         context.read<CartBloc>().add(PlaceOrder());
-        context.read<OrderBloc>().add(AddOrder(order: widget.order));
+
         int a = GetIt.I.get<SharedPreferences>().getInt("tokens") ?? 0;
         a += (widget.tokensget);
         a -= (widget.tokenspent);
         GetIt.I.get<SharedPreferences>().setInt("tokens", a);
-        Future.delayed(Duration(milliseconds: 3000)).then((value) {
+        context.read<OrderBloc>().add(AddOrder(order: widget.order, tokens: a));
+        Future.delayed(const Duration(milliseconds: 3000)).then((value) {
           Navigator.of(context).pop();
         });
       });
@@ -65,7 +66,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 237, 201, 154),
+      backgroundColor: const Color.fromARGB(255, 237, 201, 154),
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -78,7 +79,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                     FadeAnimatedText(
                       "Loading Order...",
                       duration: Duration(milliseconds: 1200),
-                      textStyle: TextStyle(
+                      textStyle: const TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.w900,
                         color: Colors.black,
@@ -87,8 +88,8 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                     ),
                     FadeAnimatedText(
                       "Loading Order...",
-                      duration: Duration(milliseconds: 1200),
-                      textStyle: TextStyle(
+                      duration: const Duration(milliseconds: 1200),
+                      textStyle: const TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.w900,
                         color: Colors.black,
@@ -97,8 +98,8 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                     ),
                     FadeAnimatedText(
                       "Loading Order...",
-                      duration: Duration(milliseconds: 1200),
-                      textStyle: TextStyle(
+                      duration: const Duration(milliseconds: 1200),
+                      textStyle: const TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.w900,
                         color: Colors.black,
@@ -107,8 +108,8 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                     ),
                     ScaleAnimatedText(
                       "Order Placed",
-                      duration: Duration(milliseconds: 3200),
-                      textStyle: TextStyle(
+                      duration: const Duration(milliseconds: 3200),
+                      textStyle: const TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.w900,
                         color: Colors.black,
@@ -117,13 +118,13 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                     )
                   ],
                   totalRepeatCount: 1,
-                  pause: Duration(milliseconds: 500),
+                  pause: const Duration(milliseconds: 500),
                 )),
-            SizedBox(
+            const SizedBox(
               height: 26,
             ),
             SizedBox(height: 180, child: lottie),
-            SizedBox(
+            const SizedBox(
               height: 26,
             ),
             SizedBox(height: 44, child: text2),
