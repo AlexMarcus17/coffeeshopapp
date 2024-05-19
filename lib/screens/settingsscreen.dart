@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:coffeeshopapp/data/authrepo.dart';
 import 'package:coffeeshopapp/data/orderrepo.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -24,7 +27,10 @@ class _SettingScreenState extends State<SettingScreen> {
     return SafeArea(
       child: isLoading
           ? Center(
-              child: CircularProgressIndicator(),
+              child: Platform.isIOS
+                  ? CupertinoActivityIndicator(
+                      radius: 20.0, color: CupertinoColors.activeBlue)
+                  : CircularProgressIndicator(),
             )
           : Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -316,7 +322,7 @@ class _SettingScreenState extends State<SettingScreen> {
                             showDialog(
                               context: context,
                               builder: (BuildContext context) {
-                                return AlertDialog(
+                                return CupertinoAlertDialog(
                                   title: Text('Are you sure?'),
                                   content: Text(
                                       'If you log out, you will have to log in again.'),
@@ -459,7 +465,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                               fontWeight: FontWeight.bold,
                                               color: Color.fromARGB(
                                                   255, 60, 42, 4),
-                                              fontSize: 12,
+                                              fontSize: 16,
                                             ),
                                           ),
                                           SizedBox(height: 4),
@@ -524,7 +530,7 @@ class _SettingScreenState extends State<SettingScreen> {
                               bool? confirmed = await showDialog<bool>(
                                 context: context,
                                 builder: (BuildContext context) {
-                                  return AlertDialog(
+                                  return CupertinoAlertDialog(
                                     title: Text('Are you sure?'),
                                     content: Text(
                                         'If you delete your account, all your data will be lost.'),
@@ -670,19 +676,33 @@ class _SettingScreenState extends State<SettingScreen> {
                                     ),
                                   ),
                                   Expanded(child: SizedBox()),
-                                  Switch(
-                                      activeColor: Colors.brown,
-                                      value: GetIt.I
-                                              .get<SharedPreferences>()
-                                              .getBool("onlyvegan") ??
-                                          false,
-                                      onChanged: (val) {
-                                        setState(() {
-                                          GetIt.I
-                                              .get<SharedPreferences>()
-                                              .setBool("onlyvegan", val);
-                                        });
-                                      }),
+                                  Platform.isIOS
+                                      ? CupertinoSwitch(
+                                          activeColor: Colors.brown,
+                                          value: GetIt.I
+                                                  .get<SharedPreferences>()
+                                                  .getBool("onlyvegan") ??
+                                              false,
+                                          onChanged: (val) {
+                                            setState(() {
+                                              GetIt.I
+                                                  .get<SharedPreferences>()
+                                                  .setBool("onlyvegan", val);
+                                            });
+                                          })
+                                      : Switch(
+                                          activeColor: Colors.brown,
+                                          value: GetIt.I
+                                                  .get<SharedPreferences>()
+                                                  .getBool("onlyvegan") ??
+                                              false,
+                                          onChanged: (val) {
+                                            setState(() {
+                                              GetIt.I
+                                                  .get<SharedPreferences>()
+                                                  .setBool("onlyvegan", val);
+                                            });
+                                          }),
                                   SizedBox(
                                     width: 14,
                                   )

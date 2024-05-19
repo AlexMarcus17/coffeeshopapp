@@ -1,13 +1,16 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
+// ignore_for_file: use_key_in_widget_constructors
+
+import 'dart:io';
+
 import 'package:coffeeshopapp/screens/cartscreen.dart';
 import 'package:coffeeshopapp/screens/settingsscreen.dart';
 import 'package:coffeeshopapp/screens/shopscreen.dart';
 import 'package:coffeeshopapp/screens/tokenscreen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:get_it/get_it.dart';
 
 class NavigationScreen extends StatefulWidget {
   @override
@@ -25,28 +28,31 @@ class _NavigationScreenState extends State<NavigationScreen> {
           if (snapshot.data == null) {
             return Scaffold(
               body: Center(
-                child: CircularProgressIndicator(),
+                child: Platform.isIOS
+                    ? const CupertinoActivityIndicator(
+                        radius: 20.0, color: CupertinoColors.activeBlue)
+                    : const CircularProgressIndicator(),
               ),
             );
           } else if (snapshot.data?[0] == ConnectivityResult.none) {
             _index = 0;
             return Scaffold(
-              backgroundColor: Color.fromARGB(255, 237, 201, 154),
+              backgroundColor: const Color.fromARGB(255, 237, 201, 154),
               appBar: PreferredSize(
-                preferredSize: Size.fromHeight(50),
+                preferredSize: const Size.fromHeight(50),
                 child: AppBar(
-                  backgroundColor: Color.fromARGB(0, 249, 153, 57),
+                  backgroundColor: const Color.fromARGB(0, 249, 153, 57),
                   elevation: 0,
                   centerTitle: true,
                   title: ShaderMask(
                     shaderCallback: (bounds) {
-                      return LinearGradient(colors: [
+                      return const LinearGradient(colors: [
                         Color.fromARGB(255, 123, 55, 30),
                         Color.fromARGB(255, 182, 118, 54),
                         Color.fromARGB(255, 155, 77, 0)
                       ]).createShader(bounds);
                     },
-                    child: Text(
+                    child: const Text(
                       "Mocha Moments",
                       style: TextStyle(
                           fontFamily: "Food Zone",
@@ -56,7 +62,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
                   ),
                 ),
               ),
-              body: Center(
+              body: const Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -90,22 +96,22 @@ class _NavigationScreenState extends State<NavigationScreen> {
             );
           } else {
             return Scaffold(
-              backgroundColor: Color.fromARGB(255, 237, 201, 154),
+              backgroundColor: const Color.fromARGB(255, 237, 201, 154),
               appBar: PreferredSize(
-                preferredSize: Size.fromHeight(50),
+                preferredSize: const Size.fromHeight(50),
                 child: AppBar(
-                  backgroundColor: Color.fromARGB(0, 249, 153, 57),
+                  backgroundColor: const Color.fromARGB(0, 249, 153, 57),
                   elevation: 0,
                   centerTitle: true,
                   title: ShaderMask(
                     shaderCallback: (bounds) {
-                      return LinearGradient(colors: [
+                      return const LinearGradient(colors: [
                         Color.fromARGB(255, 123, 55, 30),
                         Color.fromARGB(255, 182, 118, 54),
                         Color.fromARGB(255, 155, 77, 0)
                       ]).createShader(bounds);
                     },
-                    child: Text(
+                    child: const Text(
                       "Mocha Moments",
                       style: TextStyle(
                           fontFamily: "Food Zone",
@@ -122,7 +128,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
                   });
                 },
                 controller: pagecontroller,
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 children: [
                   ShopScreen(),
                   TokenScreen(),
@@ -138,7 +144,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
                   strokeColor: Colors.white,
                   unSelectedColor: Colors.grey[600],
                   backgroundColor: Colors.black,
-                  borderRadius: Radius.circular(20.0),
+                  borderRadius: const Radius.circular(20.0),
                   blurEffect: true,
                   opacity: 0.8,
                   currentIndex: _index,
@@ -150,11 +156,13 @@ class _NavigationScreenState extends State<NavigationScreen> {
                   },
                   isFloating: true,
                   items: [
-                    CustomNavigationBarItem(icon: Icon(Entypo.shop)),
-                    CustomNavigationBarItem(icon: Icon(FontAwesome.coffee)),
+                    CustomNavigationBarItem(icon: const Icon(Entypo.shop)),
                     CustomNavigationBarItem(
-                        icon: Icon(FontAwesome.shopping_cart)),
-                    CustomNavigationBarItem(icon: Icon(Ionicons.md_settings)),
+                        icon: const Icon(FontAwesome.coffee)),
+                    CustomNavigationBarItem(
+                        icon: const Icon(FontAwesome.shopping_cart)),
+                    CustomNavigationBarItem(
+                        icon: const Icon(Ionicons.md_settings)),
                   ],
                 ),
               ),

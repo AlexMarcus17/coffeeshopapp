@@ -2,6 +2,7 @@ import 'package:coffeeshopapp/blocs/cart_bloc.dart';
 import 'package:coffeeshopapp/data/authrepo.dart';
 import 'package:coffeeshopapp/data/orderrepo.dart';
 import 'package:coffeeshopapp/firebase_options.dart';
+//import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,7 +23,13 @@ Future<void> main() async {
       OrderRepository(authRepository: GetIt.I.get<AuthRepository>()));
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
-  runApp(MyApp());
+  runApp(
+    // DevicePreview(
+    // enabled: !kReleaseMode,
+    // builder: (context) =>
+    MyApp(),
+    //)
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -39,6 +46,9 @@ class MyApp extends StatelessWidget {
           ),
         ],
         child: MaterialApp(
+          // useInheritedMediaQuery: true,
+          // locale: DevicePreview.locale(context),
+          // builder: DevicePreview.appBuilder,
           title: 'Flutter Demo',
           theme: ThemeData(),
           initialRoute: "/",

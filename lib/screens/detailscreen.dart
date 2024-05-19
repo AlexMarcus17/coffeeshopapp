@@ -87,7 +87,6 @@ class _DetailScreenState extends State<DetailScreen> {
                     ),
                   ),
                   Container(
-                    height: 150,
                     width: MediaQuery.of(context).size.width * 0.7,
                     decoration: BoxDecoration(
                       color: Color.fromARGB(255, 5, 3, 30),
@@ -144,9 +143,8 @@ class _DetailScreenState extends State<DetailScreen> {
                                 fontSize: 20),
                           ),
                         ),
-                        Flexible(
-                          child: SizedBox(),
-                          fit: FlexFit.tight,
+                        SizedBox(
+                          height: 10,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,

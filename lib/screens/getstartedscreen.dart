@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:coffeeshopapp/data/authrepo.dart';
@@ -737,7 +738,11 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                                           ],
                                         )
                                   : Center(
-                                      child: CircularProgressIndicator(),
+                                      child: Platform.isIOS
+                                          ? CupertinoActivityIndicator(
+                                              radius: 20.0,
+                                              color: CupertinoColors.activeBlue)
+                                          : CircularProgressIndicator(),
                                     ),
                             ),
                           ],
