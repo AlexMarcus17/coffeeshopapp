@@ -44,9 +44,21 @@ class AuthRepository {
     await _auth.signOut();
   }
 
-  Future<void> deleteAccount() async {
-    await FirebaseFirestore.instance.collection("users").doc(getUid()).delete();
-    await _auth.currentUser?.delete();
+  Future<bool> deleteAccount(String pass) async {
+    try {
+      AuthCredential credential = EmailAuthProvider.credential(
+          email: _auth.currentUser?.email ?? "", password: pass);
+      await _auth.currentUser?.reauthenticateWithCredential(credential);
+      await FirebaseFirestore.instance
+          .collection("users")
+          .doc(getUid())
+          .delete();
+      await _auth.currentUser?.delete();
+      return true;
+    } catch (e) {
+      print("failed to delete account");
+      return false;
+    }
   }
 
   String? getUid() {

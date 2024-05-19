@@ -3,6 +3,7 @@ import 'package:coffeeshopapp/data/orderrepo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,6 +15,8 @@ class SettingScreen extends StatefulWidget {
 
 class _SettingScreenState extends State<SettingScreen> {
   bool isLoading = false;
+  String pass = "";
+  TextEditingController passController = TextEditingController(text: "");
   TextEditingController textEditingController = TextEditingController(
       text: GetIt.I.get<SharedPreferences>().getString("username"));
   @override
@@ -406,53 +409,183 @@ class _SettingScreenState extends State<SettingScreen> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 20, vertical: 6),
                         child: InkWell(
-                          onTap: () {
-                            showDialog(
+                          onTap: () async {
+                            bool confirmDelete = false;
+                            await showGeneralDialog(
                               context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: Text('Are you sure?'),
-                                  content: Text(
-                                      'If you delete your account, all your data will be lost.'),
-                                  actions: <Widget>[
-                                    TextButton(
-                                      child: Text(
-                                        'Cancel',
-                                        style: TextStyle(color: Colors.brown),
+                              barrierLabel: "",
+                              barrierDismissible: true,
+                              transitionDuration: Duration(milliseconds: 250),
+                              transitionBuilder: (context, animation,
+                                  secondaryAnimation, child) {
+                                Tween<Offset> tween = Tween(
+                                    begin: const Offset(0, 1),
+                                    end: Offset.zero);
+                                return SlideTransition(
+                                  position: tween.animate(
+                                    CurvedAnimation(
+                                        parent: animation,
+                                        curve: Curves.easeInOut),
+                                  ),
+                                  child: child,
+                                );
+                              },
+                              pageBuilder: (ctx, _, __) {
+                                return Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.amber,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(30)),
+                                  ),
+                                  margin: EdgeInsets.only(
+                                      top: 150,
+                                      bottom: 220,
+                                      left: 20,
+                                      right: 20),
+                                  height: MediaQuery.of(context).size.height,
+                                  child: KeyboardDismisser(
+                                    child: Scaffold(
+                                      resizeToAvoidBottomInset: false,
+                                      backgroundColor: Colors.transparent,
+                                      body: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            "Enter the password to delete your account",
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Color.fromARGB(
+                                                  255, 60, 42, 4),
+                                              fontSize: 12,
+                                            ),
+                                          ),
+                                          SizedBox(height: 4),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 8, horizontal: 36),
+                                            child: TextField(
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 16),
+                                              decoration: InputDecoration(
+                                                hintText: "",
+                                                border: OutlineInputBorder(),
+                                                focusedBorder:
+                                                    OutlineInputBorder(),
+                                                prefixIcon: Padding(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(horizontal: 8),
+                                                  child: Icon(Icons
+                                                      .account_circle_sharp),
+                                                ),
+                                              ),
+                                              controller: passController,
+                                            ),
+                                          ),
+                                          SizedBox(height: 10),
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              pass = passController.text;
+                                              confirmDelete = true;
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: Text(
+                                              "Enter",
+                                              style: TextStyle(
+                                                  fontSize: 18,
+                                                  fontFamily: "Coffee Crafts"),
+                                            ),
+                                            style: ElevatedButton.styleFrom(
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10.0),
+                                              ),
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 15),
+                                              elevation: 30.0,
+                                              backgroundColor: Colors.brown,
+                                              shadowColor: Colors.amber,
+                                              foregroundColor: Colors.amber,
+                                            ),
+                                          ),
+                                          SizedBox(height: 90),
+                                        ],
                                       ),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
                                     ),
-                                    TextButton(
-                                      child: Text(
-                                        'Yes',
-                                        style: TextStyle(color: Colors.brown),
-                                      ),
-                                      onPressed: () async {
-                                        Navigator.of(context).pop();
-                                        setState(() {
-                                          isLoading = true;
-                                        });
-                                        await GetIt.I
-                                            .get<AuthRepository>()
-                                            .deleteAccount();
-                                        await GetIt.I
-                                            .get<SharedPreferences>()
-                                            .clear();
-                                        setState(() {
-                                          isLoading = false;
-                                        });
-                                        GetIt.I.get<OrderRepository>().reset();
-                                        Navigator.of(context)
-                                            .pushReplacementNamed(
-                                                "/getstarted");
-                                      },
-                                    ),
-                                  ],
+                                  ),
                                 );
                               },
                             );
+
+                            if (confirmDelete) {
+                              bool? confirmed = await showDialog<bool>(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: Text('Are you sure?'),
+                                    content: Text(
+                                        'If you delete your account, all your data will be lost.'),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        child: Text('Cancel',
+                                            style:
+                                                TextStyle(color: Colors.brown)),
+                                        onPressed: () {
+                                          Navigator.of(context).pop(false);
+                                        },
+                                      ),
+                                      TextButton(
+                                        child: Text('Yes',
+                                            style:
+                                                TextStyle(color: Colors.brown)),
+                                        onPressed: () {
+                                          Navigator.of(context).pop(true);
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+
+                              if (confirmed == true) {
+                                setState(() {
+                                  isLoading = true;
+                                });
+
+                                bool deleted = await GetIt.I
+                                    .get<AuthRepository>()
+                                    .deleteAccount(pass);
+
+                                setState(() {
+                                  isLoading = false;
+                                });
+
+                                if (deleted) {
+                                  await GetIt.I
+                                      .get<SharedPreferences>()
+                                      .clear();
+                                  GetIt.I.get<OrderRepository>().reset();
+                                  Navigator.of(context)
+                                      .pushReplacementNamed("/getstarted");
+                                } else {
+                                  if (context.mounted) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Center(
+                                            child:
+                                                Text("Error deleting account")),
+                                        duration: Duration(milliseconds: 800),
+                                      ),
+                                    );
+                                  }
+                                }
+                              }
+                            }
+
+                            passController.text = "";
                           },
                           child: SizedBox(
                             height: 60,

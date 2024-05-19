@@ -3,6 +3,7 @@ import 'package:coffeeshopapp/models/cartproduct.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CartItem extends StatelessWidget {
@@ -45,32 +46,37 @@ class CartItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 3),
-                            child: Text(
-                              cartProduct.name,
-                              style: TextStyle(
-                                  color: Color.fromARGB(255, 5, 3, 30),
-                                  fontFamily: "Cartoonist",
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w900),
-                            ),
+                      FittedBox(
+                        child: Container(
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 3),
+                                child: Text(
+                                  cartProduct.name,
+                                  style: TextStyle(
+                                      color: Color.fromARGB(255, 5, 3, 30),
+                                      fontFamily: "Cartoonist",
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w900),
+                                ),
+                              ),
+                              SizedBox(width: 10),
+                              Padding(
+                                padding: const EdgeInsets.only(right: 6),
+                                child: IconButton(
+                                  onPressed: () {
+                                    context.read<CartBloc>().add(
+                                        DeleteItem(cartProduct: cartProduct));
+                                  },
+                                  icon: Icon(Icons.delete),
+                                ),
+                              ),
+                            ],
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 6),
-                            child: IconButton(
-                              onPressed: () {
-                                context
-                                    .read<CartBloc>()
-                                    .add(DeleteItem(cartProduct: cartProduct));
-                              },
-                              icon: Icon(Icons.delete),
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
                       (cartProduct.caffeine)
                           ? Text(
