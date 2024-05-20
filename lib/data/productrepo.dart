@@ -303,23 +303,25 @@ class ProductRepository {
         decaff: false),
   ];
   static List<Product> getbycategory(int categoryid, bool onlyvegan) {
-    if (!onlyvegan)
+    if (!onlyvegan) {
       return list.where((element) => element.categoryid == categoryid).toList();
-    else
+    } else {
       return list
           .where((element) =>
               element.categoryid == categoryid && element.isvegan == true)
           .toList();
+    }
   }
 
   static List<Product> getrewards(bool onlyvegan) {
-    if (!onlyvegan)
+    if (!onlyvegan) {
       return list.where((element) => element.isreward == true).toList();
-    else
+    } else {
       return list
           .where(
               (element) => element.isreward == true && element.isvegan == true)
           .toList();
+    }
   }
 
   static Future<void> up() async {}

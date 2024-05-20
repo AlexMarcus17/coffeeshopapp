@@ -2,15 +2,16 @@
 
 import 'dart:io';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:custom_navigation_bar/custom_navigation_bar.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
+
 import 'package:coffeeshopapp/screens/cartscreen.dart';
 import 'package:coffeeshopapp/screens/settingsscreen.dart';
 import 'package:coffeeshopapp/screens/shopscreen.dart';
 import 'package:coffeeshopapp/screens/tokenscreen.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:custom_navigation_bar/custom_navigation_bar.dart';
-import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 
 class NavigationScreen extends StatefulWidget {
   @override

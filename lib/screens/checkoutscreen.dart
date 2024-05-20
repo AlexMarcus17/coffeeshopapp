@@ -1,12 +1,13 @@
+// ignore_for_file: must_be_immutable, use_key_in_widget_constructors
+
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:coffeeshopapp/blocs/cart_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:lottie/lottie.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:coffeeshopapp/blocs/cart_bloc.dart';
 
 import '../blocs/order_bloc.dart';
 import '../models/order.dart';
@@ -22,18 +23,18 @@ class CheckOutScreen extends StatefulWidget {
 
 class _CheckOutScreenState extends State<CheckOutScreen> {
   var lottie = Lottie.asset("assets/loading.json");
-  dynamic text2 = Text("");
+  dynamic text2 = const Text("");
   @override
   void initState() {
     Future.delayed(Duration.zero).then((value) {
-      Future.delayed(Duration(milliseconds: 5100)).then((value) {
+      Future.delayed(const Duration(milliseconds: 5100)).then((value) {
         setState(() {
           text2 = AnimatedTextKit(
             animatedTexts: [
               ScaleAnimatedText(
                 "You received ${widget.tokensget} loyalty tokens",
-                duration: Duration(milliseconds: 3200),
-                textStyle: TextStyle(
+                duration: const Duration(milliseconds: 3200),
+                textStyle: const TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.w900,
                   color: Colors.black,
@@ -43,7 +44,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
             ],
             totalRepeatCount: 2,
             isRepeatingAnimation: true,
-            pause: Duration(milliseconds: 250),
+            pause: const Duration(milliseconds: 250),
           );
 
           lottie = Lottie.asset("assets/completed.json");
@@ -78,7 +79,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                   animatedTexts: [
                     FadeAnimatedText(
                       "Loading Order...",
-                      duration: Duration(milliseconds: 1200),
+                      duration: const Duration(milliseconds: 1200),
                       textStyle: const TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.w900,

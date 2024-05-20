@@ -1,20 +1,17 @@
-import 'dart:io';
-import 'dart:math';
+// ignore_for_file: use_key_in_widget_constructors
 
-import 'package:coffeeshopapp/data/authrepo.dart';
-import 'package:coffeeshopapp/data/orderrepo.dart';
-import 'package:coffeeshopapp/models/order.dart';
+import 'dart:io';
+
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
+
+import 'package:coffeeshopapp/data/authrepo.dart';
+import 'package:coffeeshopapp/data/orderrepo.dart';
 
 class GetStartedScreen extends StatefulWidget {
   @override
@@ -29,25 +26,24 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
   TextEditingController passEditingController = TextEditingController();
   PageController pageController = PageController(initialPage: 0);
   int pagenum = 0;
-  Color backgroundColor = Color.fromARGB(255, 230, 153, 0);
+  Color backgroundColor = const Color.fromARGB(255, 230, 153, 0);
   Widget getindicator(bool isActive) {
     return AnimatedContainer(
-      duration: Duration(milliseconds: 150),
-      margin: EdgeInsets.symmetric(horizontal: 8.0),
+      duration: const Duration(milliseconds: 150),
+      margin: const EdgeInsets.symmetric(horizontal: 8.0),
       height: 8.0,
       width: isActive ? 24.0 : 16.0,
       decoration: BoxDecoration(
         color: isActive
-            ? Color.fromARGB(255, 81, 47, 0)
-            : Color.fromARGB(255, 153, 115, 0),
-        borderRadius: BorderRadius.all(Radius.circular(12)),
+            ? const Color.fromARGB(255, 81, 47, 0)
+            : const Color.fromARGB(255, 153, 115, 0),
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
       ),
     );
   }
 
   List<Widget> buildindicators() {
     List<Widget> list = [];
-    bool isActive;
     for (int i = 0; i <= 2; i++) {
       list.add(i == pagenum ? getindicator(true) : getindicator(false));
     }
@@ -67,10 +63,10 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                   0.3,
               child: Lottie.asset("assets/page1anim.json",
                   frameRate: FrameRate.max)),
-          SizedBox(
+          const SizedBox(
             height: 40,
           ),
-          Text(
+          const Text(
             "Welcome to Mocha Moments",
             style: TextStyle(
                 color: Color.fromARGB(255, 77, 30, 3),
@@ -78,10 +74,10 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                 fontFamily: "Coffee Crafts",
                 fontWeight: FontWeight.w700),
           ),
-          SizedBox(
+          const SizedBox(
             height: 6,
           ),
-          Text(
+          const Text(
             "Discover Exceptional Coffee and Variety",
             style: TextStyle(
                 color: Color.fromARGB(178, 68, 25, 0),
@@ -89,11 +85,11 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                 fontFamily: "Coffee Crafts",
                 fontWeight: FontWeight.w700),
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
-          Padding(
-            padding: const EdgeInsets.all(12.0),
+          const Padding(
+            padding: EdgeInsets.all(12.0),
             child: Text(
               "Welcome to Mocha Moments! Experience the finest and most diverse selection of coffees, including delicious vegan options. Get ready to embark on a journey of exceptional flavors and rich brews.",
               style: TextStyle(
@@ -129,10 +125,10 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                           child: Lottie.asset("assets/page2anim.json"))),
                 ],
               )),
-          SizedBox(
+          const SizedBox(
             height: 40,
           ),
-          Text(
+          const Text(
             "Earn Rewards with Every Sip",
             style: TextStyle(
                 color: Color.fromARGB(255, 77, 30, 3),
@@ -140,10 +136,10 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                 fontFamily: "Coffee Crafts",
                 fontWeight: FontWeight.w700),
           ),
-          SizedBox(
+          const SizedBox(
             height: 6,
           ),
-          Text(
+          const Text(
             "Collect Coffee Tokens for Free Treats",
             style: TextStyle(
                 color: Color.fromARGB(178, 68, 25, 0),
@@ -151,11 +147,11 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                 fontFamily: "Coffee Crafts",
                 fontWeight: FontWeight.w700),
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
-          Padding(
-            padding: const EdgeInsets.all(12.0),
+          const Padding(
+            padding: EdgeInsets.all(12.0),
             child: Text(
               "At Mocha Moments, we value your loyalty. Every purchase earns you coffee tokens that unlock free coffees and snacks. Collect tokens, indulge in your favorite brews, and treat yourself on us!",
               style: TextStyle(
@@ -182,10 +178,10 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                   Lottie.asset("assets/page3anim.json"),
                 ],
               )),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Text(
+          const Text(
             "Indulge in Sweet Delights",
             style: TextStyle(
                 color: Color.fromARGB(255, 77, 30, 3),
@@ -193,10 +189,10 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                 fontFamily: "Coffee Crafts",
                 fontWeight: FontWeight.w700),
           ),
-          SizedBox(
+          const SizedBox(
             height: 6,
           ),
-          Text(
+          const Text(
             "Cookies, Muffins, and More",
             style: TextStyle(
                 color: Color.fromARGB(178, 68, 25, 0),
@@ -204,11 +200,11 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                 fontFamily: "Coffee Crafts",
                 fontWeight: FontWeight.w700),
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
-          Padding(
-            padding: const EdgeInsets.all(12.0),
+          const Padding(
+            padding: EdgeInsets.all(12.0),
             child: Text(
               "Indulge in more than just coffee at Mocha Moments. Discover our sweet delights like cookies and muffins, perfectly paired with our beverages. Elevate your experience with our delectable snacks.",
               style: TextStyle(
@@ -230,20 +226,20 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                       child: Scaffold(
                         backgroundColor: Colors.amber,
                         appBar: PreferredSize(
-                          preferredSize: Size.fromHeight(50),
+                          preferredSize: const Size.fromHeight(50),
                           child: AppBar(
-                            backgroundColor: Color.fromARGB(0, 249, 153, 57),
+                            backgroundColor: const Color.fromARGB(0, 249, 153, 57),
                             elevation: 0,
                             centerTitle: true,
                             title: ShaderMask(
                               shaderCallback: (bounds) {
-                                return LinearGradient(colors: [
+                                return const LinearGradient(colors: [
                                   Color.fromARGB(255, 123, 55, 30),
                                   Color.fromARGB(255, 182, 118, 54),
                                   Color.fromARGB(255, 155, 77, 0)
                                 ]).createShader(bounds);
                               },
-                              child: Text(
+                              child: const Text(
                                 "Mocha Moments",
                                 style: TextStyle(
                                     fontFamily: "Food Zone",
@@ -268,7 +264,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
                                           children: [
-                                            Text(
+                                            const Text(
                                               "Email Address",
                                               style: TextStyle(
                                                 fontWeight: FontWeight.bold,
@@ -277,22 +273,22 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                                                 fontSize: 16,
                                               ),
                                             ),
-                                            SizedBox(height: 4),
+                                            const SizedBox(height: 4),
                                             Padding(
                                               padding:
                                                   const EdgeInsets.all(8.0),
                                               child: TextField(
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 16,
                                                 ),
-                                                decoration: InputDecoration(
+                                                decoration: const InputDecoration(
                                                   hintText: "",
                                                   border: OutlineInputBorder(),
                                                   focusedBorder:
                                                       OutlineInputBorder(),
                                                   prefixIcon: Padding(
-                                                    padding: const EdgeInsets
+                                                    padding: EdgeInsets
                                                         .symmetric(
                                                         horizontal: 8),
                                                     child: Icon(Icons.email),
@@ -302,7 +298,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                                                     emailEditingController,
                                               ),
                                             ),
-                                            Text(
+                                            const Text(
                                               "Password",
                                               style: TextStyle(
                                                 fontWeight: FontWeight.bold,
@@ -311,23 +307,23 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                                                 fontSize: 16,
                                               ),
                                             ),
-                                            SizedBox(height: 4),
+                                            const SizedBox(height: 4),
                                             Padding(
                                               padding:
                                                   const EdgeInsets.all(8.0),
                                               child: TextField(
                                                 obscureText: true,
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 16,
                                                 ),
-                                                decoration: InputDecoration(
+                                                decoration: const InputDecoration(
                                                   hintText: "",
                                                   border: OutlineInputBorder(),
                                                   focusedBorder:
                                                       OutlineInputBorder(),
                                                   prefixIcon: Padding(
-                                                    padding: const EdgeInsets
+                                                    padding: EdgeInsets
                                                         .symmetric(
                                                         horizontal: 8),
                                                     child: Icon(Icons.password),
@@ -337,14 +333,14 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                                                     passEditingController,
                                               ),
                                             ),
-                                            SizedBox(height: 10),
+                                            const SizedBox(height: 10),
                                             ElevatedButton(
                                               onPressed: () async {
                                                 if (!EmailValidator.validate(
                                                     emailEditingController.text
                                                         .trim())) {
                                                   ScaffoldMessenger.of(context)
-                                                      .showSnackBar(SnackBar(
+                                                      .showSnackBar(const SnackBar(
                                                           content: Text(
                                                               "Invalid Email Address")));
                                                 } else if (passEditingController
@@ -353,7 +349,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                                                         .length <
                                                     8) {
                                                   ScaffoldMessenger.of(context)
-                                                      .showSnackBar(SnackBar(
+                                                      .showSnackBar(const SnackBar(
                                                           content: Text(
                                                               "Invalid Password")));
                                                 } else {
@@ -376,7 +372,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                                                               .trim());
                                                   int tokens = 0;
                                                   if (success) {
-                                                    tokens = await GetIt.I
+                                                    tokens = GetIt.I
                                                         .get<OrderRepository>()
                                                         .getTokens();
                                                   }
@@ -386,7 +382,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                                                   if (success) {
                                                     ScaffoldMessenger.of(
                                                             context)
-                                                        .showSnackBar(SnackBar(
+                                                        .showSnackBar(const SnackBar(
                                                             content: Text(
                                                                 "Sign In Successful")));
                                                     GetIt.I
@@ -426,53 +422,53 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                                                   }
                                                 }
                                               },
-                                              child: Text(
+                                              style: ElevatedButton.styleFrom(
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                ),
+                                                padding: const EdgeInsets.symmetric(
+                                                    horizontal: 15),
+                                                elevation: 30.0,
+                                                backgroundColor: Colors.brown,
+                                                shadowColor: Colors.amber,
+                                                foregroundColor: Colors.amber,
+                                              ),
+                                              child: const Text(
                                                 "Log In",
                                                 style: TextStyle(
                                                     fontSize: 18,
                                                     fontFamily:
                                                         "Coffee Crafts"),
                                               ),
-                                              style: ElevatedButton.styleFrom(
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10.0),
-                                                ),
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 15),
-                                                elevation: 30.0,
-                                                backgroundColor: Colors.brown,
-                                                shadowColor: Colors.amber,
-                                                foregroundColor: Colors.amber,
-                                              ),
                                             ),
-                                            SizedBox(height: 10),
+                                            const SizedBox(height: 10),
                                             ElevatedButton(
                                               onPressed: () {
                                                 setState2(() {
                                                   login = false;
                                                 });
                                               },
-                                              child: Text(
-                                                "or, Sign Up",
-                                                style: TextStyle(
-                                                    fontSize: 18,
-                                                    fontFamily:
-                                                        "Coffee Crafts"),
-                                              ),
                                               style: ElevatedButton.styleFrom(
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           10.0),
                                                 ),
-                                                padding: EdgeInsets.symmetric(
+                                                padding: const EdgeInsets.symmetric(
                                                     horizontal: 15),
                                                 elevation: 30.0,
                                                 backgroundColor: Colors.brown,
                                                 shadowColor: Colors.amber,
                                                 foregroundColor: Colors.amber,
+                                              ),
+                                              child: const Text(
+                                                "or, Sign Up",
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    fontFamily:
+                                                        "Coffee Crafts"),
                                               ),
                                             ),
                                           ],
@@ -483,7 +479,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
                                           children: [
-                                            Text(
+                                            const Text(
                                               "Username",
                                               style: TextStyle(
                                                 fontWeight: FontWeight.bold,
@@ -492,22 +488,22 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                                                 fontSize: 16,
                                               ),
                                             ),
-                                            SizedBox(height: 4),
+                                            const SizedBox(height: 4),
                                             Padding(
                                               padding:
                                                   const EdgeInsets.all(8.0),
                                               child: TextField(
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 16,
                                                 ),
-                                                decoration: InputDecoration(
+                                                decoration: const InputDecoration(
                                                   hintText: "",
                                                   border: OutlineInputBorder(),
                                                   focusedBorder:
                                                       OutlineInputBorder(),
                                                   prefixIcon: Padding(
-                                                    padding: const EdgeInsets
+                                                    padding: EdgeInsets
                                                         .symmetric(
                                                         horizontal: 8),
                                                     child: Icon(Icons
@@ -518,7 +514,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                                                     nameEditingController,
                                               ),
                                             ),
-                                            Text(
+                                            const Text(
                                               "Email Address",
                                               style: TextStyle(
                                                 fontWeight: FontWeight.bold,
@@ -527,22 +523,22 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                                                 fontSize: 16,
                                               ),
                                             ),
-                                            SizedBox(height: 4),
+                                            const SizedBox(height: 4),
                                             Padding(
                                               padding:
                                                   const EdgeInsets.all(8.0),
                                               child: TextField(
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 16,
                                                 ),
-                                                decoration: InputDecoration(
+                                                decoration: const InputDecoration(
                                                   hintText: "",
                                                   border: OutlineInputBorder(),
                                                   focusedBorder:
                                                       OutlineInputBorder(),
                                                   prefixIcon: Padding(
-                                                    padding: const EdgeInsets
+                                                    padding: EdgeInsets
                                                         .symmetric(
                                                         horizontal: 8),
                                                     child: Icon(Icons.email),
@@ -552,7 +548,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                                                     emailEditingController,
                                               ),
                                             ),
-                                            Text(
+                                            const Text(
                                               "Password",
                                               style: TextStyle(
                                                 fontWeight: FontWeight.bold,
@@ -561,23 +557,23 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                                                 fontSize: 16,
                                               ),
                                             ),
-                                            SizedBox(height: 4),
+                                            const SizedBox(height: 4),
                                             Padding(
                                               padding:
                                                   const EdgeInsets.all(8.0),
                                               child: TextField(
                                                 obscureText: true,
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 16,
                                                 ),
-                                                decoration: InputDecoration(
+                                                decoration: const InputDecoration(
                                                   hintText: "",
                                                   border: OutlineInputBorder(),
                                                   focusedBorder:
                                                       OutlineInputBorder(),
                                                   prefixIcon: Padding(
-                                                    padding: const EdgeInsets
+                                                    padding: EdgeInsets
                                                         .symmetric(
                                                         horizontal: 8),
                                                     child: Icon(Icons.password),
@@ -587,7 +583,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                                                     passEditingController,
                                               ),
                                             ),
-                                            SizedBox(height: 10),
+                                            const SizedBox(height: 10),
                                             ElevatedButton(
                                               onPressed: () async {
                                                 if (nameEditingController.text
@@ -595,7 +591,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                                                         .length <
                                                     3) {
                                                   ScaffoldMessenger.of(context)
-                                                      .showSnackBar(SnackBar(
+                                                      .showSnackBar(const SnackBar(
                                                           content: Text(
                                                               "Name must be at least 3 characters long")));
                                                 } else if (!EmailValidator
@@ -604,7 +600,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                                                             .text
                                                             .trim())) {
                                                   ScaffoldMessenger.of(context)
-                                                      .showSnackBar(SnackBar(
+                                                      .showSnackBar(const SnackBar(
                                                           content: Text(
                                                               "Invalid Email Address")));
                                                 } else if (passEditingController
@@ -613,7 +609,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                                                         .length <
                                                     8) {
                                                   ScaffoldMessenger.of(context)
-                                                      .showSnackBar(SnackBar(
+                                                      .showSnackBar(const SnackBar(
                                                           content: Text(
                                                               "Password must be at least 8 characters long")));
                                                 } else {
@@ -648,7 +644,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                                                   if (success) {
                                                     ScaffoldMessenger.of(
                                                             context)
-                                                        .showSnackBar(SnackBar(
+                                                        .showSnackBar(const SnackBar(
                                                             content: Text(
                                                                 "Sign Up Successful")));
                                                     GetIt.I
@@ -686,63 +682,63 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                                                   }
                                                 }
                                               },
-                                              child: Text(
+                                              style: ElevatedButton.styleFrom(
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                ),
+                                                padding: const EdgeInsets.symmetric(
+                                                    horizontal: 15),
+                                                elevation: 30.0,
+                                                backgroundColor: Colors.brown,
+                                                shadowColor: Colors.amber,
+                                                foregroundColor: Colors.amber,
+                                              ),
+                                              child: const Text(
                                                 "Sign Up",
                                                 style: TextStyle(
                                                     fontSize: 18,
                                                     fontFamily:
                                                         "Coffee Crafts"),
                                               ),
-                                              style: ElevatedButton.styleFrom(
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10.0),
-                                                ),
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 15),
-                                                elevation: 30.0,
-                                                backgroundColor: Colors.brown,
-                                                shadowColor: Colors.amber,
-                                                foregroundColor: Colors.amber,
-                                              ),
                                             ),
-                                            SizedBox(height: 10),
+                                            const SizedBox(height: 10),
                                             ElevatedButton(
                                               onPressed: () {
                                                 setState2(() {
                                                   login = true;
                                                 });
                                               },
-                                              child: Text(
-                                                "or, Log In",
-                                                style: TextStyle(
-                                                    fontSize: 18,
-                                                    fontFamily:
-                                                        "Coffee Crafts"),
-                                              ),
                                               style: ElevatedButton.styleFrom(
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           10.0),
                                                 ),
-                                                padding: EdgeInsets.symmetric(
+                                                padding: const EdgeInsets.symmetric(
                                                     horizontal: 15),
                                                 elevation: 30.0,
                                                 backgroundColor: Colors.brown,
                                                 shadowColor: Colors.amber,
                                                 foregroundColor: Colors.amber,
                                               ),
+                                              child: const Text(
+                                                "or, Log In",
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    fontFamily:
+                                                        "Coffee Crafts"),
+                                              ),
                                             ),
                                           ],
                                         )
                                   : Center(
                                       child: Platform.isIOS
-                                          ? CupertinoActivityIndicator(
+                                          ? const CupertinoActivityIndicator(
                                               radius: 20.0,
                                               color: CupertinoColors.activeBlue)
-                                          : CircularProgressIndicator(),
+                                          : const CircularProgressIndicator(),
                                     ),
                             ),
                           ],
@@ -756,13 +752,13 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
                 ),
-                padding: EdgeInsets.symmetric(horizontal: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 elevation: 30.0,
                 backgroundColor: Colors.brown,
                 shadowColor: Colors.amber,
                 foregroundColor: Colors.amber,
               ),
-              child: Row(
+              child: const Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
@@ -793,10 +789,10 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
       backgroundColor: backgroundColor,
       body: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Container(
+          SizedBox(
             height: (MediaQuery.of(context).size.height -
                     MediaQuery.of(context).viewInsets.top -
                     MediaQuery.of(context).viewInsets.bottom) *
@@ -807,13 +803,13 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                 setState(() {
                   switch (value) {
                     case 0:
-                      backgroundColor = Color.fromARGB(255, 230, 153, 0);
+                      backgroundColor = const Color.fromARGB(255, 230, 153, 0);
                       break;
                     case 1:
-                      backgroundColor = Color.fromARGB(255, 213, 125, 23);
+                      backgroundColor = const Color.fromARGB(255, 213, 125, 23);
                       break;
                     case 2:
-                      backgroundColor = Color.fromARGB(255, 193, 167, 18);
+                      backgroundColor = const Color.fromARGB(255, 193, 167, 18);
                       break;
                   }
                   pagenum = value;
@@ -822,7 +818,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
               children: getpages(),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 40,
           ),
           Row(

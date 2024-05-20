@@ -1,10 +1,9 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs, sort_constructors_first, must_be_immutable, use_key_in_widget_constructors
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:coffeeshopapp/blocs/cart_bloc.dart';
 import 'package:coffeeshopapp/models/cartproduct.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:coffeeshopapp/models/product.dart';
 
 class DetailScreen extends StatefulWidget {
@@ -22,22 +21,22 @@ class _DetailScreenState extends State<DetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 5, 3, 30),
+      backgroundColor: const Color.fromARGB(255, 5, 3, 30),
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(50),
+        preferredSize: const Size.fromHeight(50),
         child: AppBar(
-          backgroundColor: Color.fromARGB(0, 249, 153, 57),
+          backgroundColor: const Color.fromARGB(0, 249, 153, 57),
           elevation: 0,
           centerTitle: true,
           title: ShaderMask(
             shaderCallback: (bounds) {
-              return LinearGradient(colors: [
+              return const LinearGradient(colors: [
                 Color.fromARGB(255, 123, 55, 30),
                 Color.fromARGB(255, 182, 118, 54),
                 Color.fromARGB(255, 155, 77, 0)
               ]).createShader(bounds);
             },
-            child: Text(
+            child: const Text(
               "Mocha Moments",
               style: TextStyle(
                   fontFamily: "Food Zone",
@@ -59,7 +58,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
                 Expanded(
                   child: Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(30),
                         topRight: Radius.circular(30),
@@ -80,7 +79,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         left: MediaQuery.of(context).size.width * 0.22,
                         bottom: 6),
                     child: Hero(
-                      tag: "${widget.product.name}",
+                      tag: widget.product.name,
                       child: ClipRect(
                         child: Image.asset(widget.product.imagepath),
                       ),
@@ -88,7 +87,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   ),
                   Container(
                     width: MediaQuery.of(context).size.width * 0.7,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Color.fromARGB(255, 5, 3, 30),
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(37),
@@ -110,7 +109,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                     const EdgeInsets.only(top: 16, left: 22),
                                 child: Text(
                                   widget.product.name,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Color.fromARGB(255, 237, 201, 154),
                                       fontFamily: "Cartoonist",
                                       fontWeight: FontWeight.w900,
@@ -121,8 +120,8 @@ class _DetailScreenState extends State<DetailScreen> {
                             Padding(
                               padding: const EdgeInsets.only(top: 22),
                               child: Text(
-                                widget.product.price.toString() + "\$",
-                                style: TextStyle(
+                                "${widget.product.price}\$",
+                                style: const TextStyle(
                                   fontSize: 14,
                                   fontFamily: "League Spartan",
                                   fontWeight: FontWeight.w300,
@@ -136,14 +135,14 @@ class _DetailScreenState extends State<DetailScreen> {
                           padding: const EdgeInsets.only(top: 8, left: 22),
                           child: Text(
                             widget.product.subtitle,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Color.fromARGB(255, 166, 155, 140),
                                 fontFamily: "Cartoonist",
                                 fontWeight: FontWeight.w700,
                                 fontSize: 20),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Row(
@@ -156,7 +155,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                       left: 22, bottom: 16),
                                   child: Text(
                                     "You get: ${widget.product.tokens} ",
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 20,
                                       fontFamily: "Cartoonist",
                                       fontWeight: FontWeight.w800,
@@ -165,8 +164,8 @@ class _DetailScreenState extends State<DetailScreen> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.only(bottom: 16),
-                                  child: Container(
+                                  padding: const EdgeInsets.only(bottom: 16),
+                                  child: SizedBox(
                                     height: 20,
                                     child: Image.asset("assets/coffeebean.png"),
                                   ),
@@ -178,12 +177,12 @@ class _DetailScreenState extends State<DetailScreen> {
                                     padding: const EdgeInsets.only(
                                         right: 22, bottom: 6),
                                     child: SizedBox(
-                                      child: Image.asset("assets/vegantag.png"),
                                       height: 28,
                                       width: 30,
+                                      child: Image.asset("assets/vegantag.png"),
                                     ),
                                   )
-                                : SizedBox(
+                                : const SizedBox(
                                     height: 30,
                                     width: 30,
                                   )
@@ -192,15 +191,15 @@ class _DetailScreenState extends State<DetailScreen> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 14,
                   ),
-                  Container(
+                  SizedBox(
                     width: MediaQuery.of(context).size.width * 0.78,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           "Description",
                           style: TextStyle(
                               color: Colors.black,
@@ -208,12 +207,12 @@ class _DetailScreenState extends State<DetailScreen> {
                               fontWeight: FontWeight.w900,
                               fontSize: 22),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 8,
                         ),
                         Text(
                           widget.product.description,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Colors.black,
                               fontFamily: "Cartoonist",
                               fontWeight: FontWeight.w800,
@@ -222,7 +221,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 14,
                   ),
                   (widget.product.decaff)
@@ -240,17 +239,17 @@ class _DetailScreenState extends State<DetailScreen> {
                                 width: MediaQuery.of(context).size.width * 0.37,
                                 decoration: BoxDecoration(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(25)),
+                                      const BorderRadius.all(Radius.circular(25)),
                                   color: (caffeine)
-                                      ? Color.fromARGB(255, 105, 54, 3)
-                                      : Color.fromARGB(255, 180, 166, 124),
+                                      ? const Color.fromARGB(255, 105, 54, 3)
+                                      : const Color.fromARGB(255, 180, 166, 124),
                                 ),
                                 child: Center(
                                   child: Text(
                                     "With Caffeine",
                                     style: TextStyle(
                                         color: (caffeine)
-                                            ? Color.fromARGB(255, 237, 201, 154)
+                                            ? const Color.fromARGB(255, 237, 201, 154)
                                             : Colors.black,
                                         fontWeight: FontWeight.w900,
                                         fontFamily: "Cartoonist",
@@ -259,7 +258,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                 ),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 20,
                             ),
                             InkWell(
@@ -273,17 +272,17 @@ class _DetailScreenState extends State<DetailScreen> {
                                 width: MediaQuery.of(context).size.width * 0.37,
                                 decoration: BoxDecoration(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(25)),
+                                      const BorderRadius.all(Radius.circular(25)),
                                   color: (!caffeine)
-                                      ? Color.fromARGB(255, 105, 54, 3)
-                                      : Color.fromARGB(255, 180, 166, 124),
+                                      ? const Color.fromARGB(255, 105, 54, 3)
+                                      : const Color.fromARGB(255, 180, 166, 124),
                                 ),
                                 child: Center(
                                   child: Text(
                                     "Decaffeinated",
                                     style: TextStyle(
                                         color: (!caffeine)
-                                            ? Color.fromARGB(255, 237, 201, 154)
+                                            ? const Color.fromARGB(255, 237, 201, 154)
                                             : Colors.black,
                                         fontWeight: FontWeight.w900,
                                         fontFamily: "Cartoonist",
@@ -294,18 +293,18 @@ class _DetailScreenState extends State<DetailScreen> {
                             ),
                           ],
                         )
-                      : SizedBox(
+                      : const SizedBox(
                           height: 1,
                         ),
-                  SizedBox(
+                  const SizedBox(
                     height: 24,
                   ),
-                  Container(
+                  SizedBox(
                     height: 40,
                     width: MediaQuery.of(context).size.width * 0.7,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color.fromARGB(255, 5, 3, 30),
+                        backgroundColor: const Color.fromARGB(255, 5, 3, 30),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
@@ -324,12 +323,12 @@ class _DetailScreenState extends State<DetailScreen> {
                                 decaff: !caffeine)));
                         Navigator.of(context).pop("added");
                       },
-                      child: Text(
+                      child: const Text(
                         "ADD TO CART",
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                 ],

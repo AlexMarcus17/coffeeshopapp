@@ -1,9 +1,10 @@
+// ignore_for_file: must_be_immutable, use_key_in_widget_constructors
+
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:coffeeshopapp/models/cartproduct.dart';
 import 'package:coffeeshopapp/models/product.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/cart_bloc.dart';
 
@@ -20,7 +21,7 @@ class _RewardItemState extends State<RewardItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(
             Radius.circular(30),
           ),
@@ -42,11 +43,11 @@ class _RewardItemState extends State<RewardItem> {
                     bottom: 0,
                     child: (widget.product.isvegan)
                         ? SizedBox(
-                            child: Image.asset("assets/vegantag.png"),
                             height: 30,
                             width: 30,
+                            child: Image.asset("assets/vegantag.png"),
                           )
-                        : SizedBox(
+                        : const SizedBox(
                             height: 30,
                             width: 30,
                           ))
@@ -54,10 +55,10 @@ class _RewardItemState extends State<RewardItem> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Text(
-              "${widget.product.name}",
-              style: TextStyle(
+              widget.product.name,
+              style: const TextStyle(
                   color: Color.fromARGB(255, 225, 206, 181),
                   fontFamily: "Cartoonist",
                   fontSize: 20,
@@ -78,14 +79,14 @@ class _RewardItemState extends State<RewardItem> {
                       children: [
                         Text(
                           "${widget.product.tokenprice} ",
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 20,
                             fontFamily: "Cartoonist",
                             fontWeight: FontWeight.w800,
                             color: Color.fromARGB(255, 228, 176, 108),
                           ),
                         ),
-                        Container(
+                        SizedBox(
                           height: 20,
                           child: Image.asset("assets/coffeebean.png"),
                         ),
@@ -108,7 +109,7 @@ class _RewardItemState extends State<RewardItem> {
                                         caffeine: false,
                                         decaff: false)));
                                 ScaffoldMessenger.of(context)
-                                    .showSnackBar(SnackBar(
+                                    .showSnackBar(const SnackBar(
                                   content: Text("Item added to cart"),
                                   duration: Duration(milliseconds: 800),
                                 ));
@@ -117,7 +118,7 @@ class _RewardItemState extends State<RewardItem> {
                                     barrierLabel: "",
                                     barrierDismissible: true,
                                     transitionDuration:
-                                        Duration(milliseconds: 250),
+                                        const Duration(milliseconds: 250),
                                     transitionBuilder: (context, animation,
                                         secondaryAnimation, child) {
                                       Tween<Offset> tween;
@@ -137,7 +138,7 @@ class _RewardItemState extends State<RewardItem> {
                                     pageBuilder: (ctx, _, __) {
                                       bool caffeine = true;
                                       return Container(
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                             color: Colors.amber,
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(30))),
@@ -165,7 +166,7 @@ class _RewardItemState extends State<RewardItem> {
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.center,
                                                 children: [
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     height: 4,
                                                   ),
                                                   Padding(
@@ -192,18 +193,18 @@ class _RewardItemState extends State<RewardItem> {
                                                                 0.37,
                                                             decoration:
                                                                 BoxDecoration(
-                                                              borderRadius: BorderRadius
+                                                              borderRadius: const BorderRadius
                                                                   .all(Radius
                                                                       .circular(
                                                                           25)),
                                                               color: (caffeine)
-                                                                  ? Color
+                                                                  ? const Color
                                                                       .fromARGB(
                                                                           255,
                                                                           105,
                                                                           54,
                                                                           3)
-                                                                  : Color
+                                                                  : const Color
                                                                       .fromARGB(
                                                                           255,
                                                                           180,
@@ -215,7 +216,7 @@ class _RewardItemState extends State<RewardItem> {
                                                                 "With Caffeine",
                                                                 style: TextStyle(
                                                                     color: (caffeine)
-                                                                        ? Color.fromARGB(
+                                                                        ? const Color.fromARGB(
                                                                             255,
                                                                             237,
                                                                             201,
@@ -233,7 +234,7 @@ class _RewardItemState extends State<RewardItem> {
                                                             ),
                                                           ),
                                                         ),
-                                                        SizedBox(
+                                                        const SizedBox(
                                                           width: 20,
                                                         ),
                                                         InkWell(
@@ -251,18 +252,18 @@ class _RewardItemState extends State<RewardItem> {
                                                                 0.37,
                                                             decoration:
                                                                 BoxDecoration(
-                                                              borderRadius: BorderRadius
+                                                              borderRadius: const BorderRadius
                                                                   .all(Radius
                                                                       .circular(
                                                                           25)),
                                                               color: (!caffeine)
-                                                                  ? Color
+                                                                  ? const Color
                                                                       .fromARGB(
                                                                           255,
                                                                           105,
                                                                           54,
                                                                           3)
-                                                                  : Color
+                                                                  : const Color
                                                                       .fromARGB(
                                                                           255,
                                                                           180,
@@ -274,7 +275,7 @@ class _RewardItemState extends State<RewardItem> {
                                                                 "Decaffeinated",
                                                                 style: TextStyle(
                                                                     color: (!caffeine)
-                                                                        ? Color.fromARGB(
+                                                                        ? const Color.fromARGB(
                                                                             255,
                                                                             237,
                                                                             201,
@@ -295,7 +296,7 @@ class _RewardItemState extends State<RewardItem> {
                                                       ],
                                                     ),
                                                   ),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     height: 10,
                                                   ),
                                                   ElevatedButton(
@@ -323,20 +324,13 @@ class _RewardItemState extends State<RewardItem> {
                                                       ScaffoldMessenger.of(
                                                               context)
                                                           .showSnackBar(
-                                                              SnackBar(
+                                                              const SnackBar(
                                                         content: Text(
                                                             "Item added to cart"),
                                                         duration: Duration(
                                                             milliseconds: 800),
                                                       ));
                                                     },
-                                                    child: Text(
-                                                      "Add to Cart",
-                                                      style: TextStyle(
-                                                          fontSize: 22,
-                                                          fontFamily:
-                                                              "Coffee Crafts"),
-                                                    ),
                                                     style: ElevatedButton
                                                         .styleFrom(
                                                       shape:
@@ -346,7 +340,7 @@ class _RewardItemState extends State<RewardItem> {
                                                                 .circular(10.0),
                                                       ),
                                                       padding:
-                                                          EdgeInsets.symmetric(
+                                                          const EdgeInsets.symmetric(
                                                               horizontal: 15),
                                                       elevation: 30.0,
                                                       backgroundColor:
@@ -354,6 +348,13 @@ class _RewardItemState extends State<RewardItem> {
                                                       shadowColor: Colors.amber,
                                                       foregroundColor:
                                                           Colors.amber,
+                                                    ),
+                                                    child: const Text(
+                                                      "Add to Cart",
+                                                      style: TextStyle(
+                                                          fontSize: 22,
+                                                          fontFamily:
+                                                              "Coffee Crafts"),
                                                     ),
                                                   )
                                                 ]),
@@ -374,13 +375,13 @@ class _RewardItemState extends State<RewardItem> {
                               spreadRadius: 2,
                               blurRadius: 5,
                               offset:
-                                  Offset(0, 3), // changes the shadow direction
+                                  const Offset(0, 3),
                             ),
                           ],
                           color: Colors.grey,
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: Icon(
+                        child: const Icon(
                           Icons.add,
                           color: Color.fromARGB(255, 5, 3, 30),
                           size: 20,
@@ -390,7 +391,7 @@ class _RewardItemState extends State<RewardItem> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 8,
               )
             ],

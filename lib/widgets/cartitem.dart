@@ -1,10 +1,10 @@
+// ignore_for_file: must_be_immutable, use_key_in_widget_constructors
+
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:coffeeshopapp/blocs/cart_bloc.dart';
 import 'package:coffeeshopapp/models/cartproduct.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CartItem extends StatelessWidget {
   CartProduct cartProduct;
@@ -26,7 +26,7 @@ class CartItem extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Color.fromARGB(255, 5, 3, 30),
                     borderRadius: BorderRadius.all(Radius.circular(15)),
                   ),
@@ -36,7 +36,7 @@ class CartItem extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 8,
               ),
               Expanded(
@@ -47,35 +47,33 @@ class CartItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       FittedBox(
-                        child: Container(
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 3),
-                                child: Text(
-                                  cartProduct.name,
-                                  style: TextStyle(
-                                      color: Color.fromARGB(255, 5, 3, 30),
-                                      fontFamily: "Cartoonist",
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w900),
-                                ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 3),
+                              child: Text(
+                                cartProduct.name,
+                                style: const TextStyle(
+                                    color: Color.fromARGB(255, 5, 3, 30),
+                                    fontFamily: "Cartoonist",
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w900),
                               ),
-                              SizedBox(width: 10),
-                              Padding(
-                                padding: const EdgeInsets.only(right: 6),
-                                child: IconButton(
-                                  onPressed: () {
-                                    context.read<CartBloc>().add(
-                                        DeleteItem(cartProduct: cartProduct));
-                                  },
-                                  icon: Icon(Icons.delete),
-                                ),
+                            ),
+                            const SizedBox(width: 10),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 6),
+                              child: IconButton(
+                                onPressed: () {
+                                  context.read<CartBloc>().add(
+                                      DeleteItem(cartProduct: cartProduct));
+                                },
+                                icon: const Icon(Icons.delete),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                       (cartProduct.caffeine)
@@ -83,13 +81,13 @@ class CartItem extends StatelessWidget {
                               (cartProduct.decaff)
                                   ? "Decaffeinated"
                                   : "with Caffeine",
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Color.fromARGB(255, 124, 116, 104),
                                   fontFamily: "Cartoonist",
                                   fontWeight: FontWeight.w700,
                                   fontSize: 20),
                             )
-                          : SizedBox(
+                          : const SizedBox(
                               height: 10,
                             ),
                       Row(
@@ -100,7 +98,7 @@ class CartItem extends StatelessWidget {
                                   padding: const EdgeInsets.only(left: 3),
                                   child: Text(
                                     "${cartProduct.price * cartProduct.num} \$",
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Color.fromARGB(255, 5, 3, 30),
                                         fontFamily: "Cartoonist",
                                         fontSize: 20,
@@ -113,7 +111,7 @@ class CartItem extends StatelessWidget {
                                     children: [
                                       Text(
                                         "${cartProduct.tokenprice * cartProduct.num} ",
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color:
                                                 Color.fromARGB(255, 5, 3, 30),
                                             fontFamily: "Cartoonist",
@@ -137,11 +135,11 @@ class CartItem extends StatelessWidget {
                                     context.read<CartBloc>().add(
                                         MinusItem(cartProduct: cartProduct));
                                   },
-                                  icon: Icon(Icons.remove),
+                                  icon: const Icon(Icons.remove),
                                 ),
                                 Text(
                                   cartProduct.num.toString(),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.w600),
                                 ),
@@ -150,7 +148,7 @@ class CartItem extends StatelessWidget {
                                     context.read<CartBloc>().add(
                                         PlusItem(cartProduct: cartProduct));
                                   },
-                                  icon: Icon(Icons.add),
+                                  icon: const Icon(Icons.add),
                                 ),
                               ],
                             ),

@@ -1,6 +1,9 @@
+// ignore_for_file: must_be_immutable, use_key_in_widget_constructors
+
+import 'package:flutter/material.dart';
+
 import 'package:coffeeshopapp/models/product.dart';
 import 'package:coffeeshopapp/screens/detailscreen.dart';
-import 'package:flutter/material.dart';
 
 class ShopItem extends StatelessWidget {
   Product product;
@@ -11,14 +14,15 @@ class ShopItem extends StatelessWidget {
       onTap: () async {
         String? added = await Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => DetailScreen(product: product)));
-        if (added == "added")
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        if (added == "added" && context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text("Item added to cart"),
             duration: Duration(milliseconds: 800),
           ));
+        }
       },
       child: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             borderRadius: BorderRadius.all(
               Radius.circular(30),
             ),
@@ -30,17 +34,17 @@ class ShopItem extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
               child: Hero(
-                tag: "${product.name}",
+                tag: product.name,
                 child: ClipRRect(
                   child: Image.asset(product.imagepath),
                 ),
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Text(
-                "${product.name}",
-                style: TextStyle(
+                product.name,
+                style: const TextStyle(
                     color: Color.fromARGB(255, 225, 206, 181),
                     fontFamily: "Cartoonist",
                     fontSize: 20,
@@ -59,7 +63,7 @@ class ShopItem extends StatelessWidget {
                     children: [
                       Text(
                         "${product.price}\$",
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 13,
                           fontFamily: "League Spartan",
                           fontWeight: FontWeight.w300,
@@ -68,18 +72,18 @@ class ShopItem extends StatelessWidget {
                       ),
                       (product.isvegan)
                           ? SizedBox(
-                              child: Image.asset("assets/vegantag.png"),
                               height: 30,
                               width: 30,
+                              child: Image.asset("assets/vegantag.png"),
                             )
-                          : SizedBox(
+                          : const SizedBox(
                               height: 30,
                               width: 30,
                             )
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 8,
                 )
               ],

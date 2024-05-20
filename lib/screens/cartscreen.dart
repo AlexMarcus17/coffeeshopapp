@@ -1,13 +1,12 @@
-import 'package:coffeeshopapp/blocs/cart_bloc.dart';
-import 'package:coffeeshopapp/models/order.dart';
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:coffeeshopapp/blocs/cart_bloc.dart';
+import 'package:coffeeshopapp/models/order.dart';
 
 import '../widgets/cartitem.dart';
 
@@ -43,7 +42,7 @@ class CartScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
+              const Padding(
                 padding:
                     EdgeInsets.only(top: 8, left: 18, right: 12, bottom: 10),
                 child: Text(
@@ -58,7 +57,7 @@ class CartScreen extends StatelessWidget {
               ),
               Expanded(
                 child: (list.isEmpty)
-                    ? Center(
+                    ? const Center(
                         child: Text(
                           "The Cart is Empty",
                           style: TextStyle(
@@ -72,7 +71,7 @@ class CartScreen extends StatelessWidget {
                     : ListView.builder(
                         itemBuilder: (context, id) {
                           if (id < list1.length) return CartItem(list1[id]);
-                          if (id == list1.length && haverewards)
+                          if (id == list1.length && haverewards) {
                             return SizedBox(
                               height: 50,
                               child: Padding(
@@ -82,7 +81,7 @@ class CartScreen extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(
+                                    const Text(
                                       "Free Products",
                                       style: TextStyle(
                                         fontSize: 22,
@@ -95,7 +94,7 @@ class CartScreen extends StatelessWidget {
                                       children: [
                                         Text(
                                           "You have: ${GetIt.I.get<SharedPreferences>().getInt("tokens") ?? 0}",
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontSize: 20,
                                             fontFamily: "Cartoonist",
                                             fontWeight: FontWeight.w900,
@@ -103,10 +102,10 @@ class CartScreen extends StatelessWidget {
                                                 Color.fromARGB(255, 5, 3, 30),
                                           ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 2,
                                         ),
-                                        Container(
+                                        SizedBox(
                                           height: 22,
                                           child: Image.asset(
                                               "assets/coffeebean.png"),
@@ -117,8 +116,10 @@ class CartScreen extends StatelessWidget {
                                 ),
                               ),
                             );
-                          if (id > list1.length)
+                          }
+                          if (id > list1.length) {
                             return CartItem(list2[id - list1.length - 1]);
+                          }
                         },
                         itemCount: list2.length + list1.length + 1,
                       ),
@@ -129,13 +130,13 @@ class CartScreen extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
+                          const Text(
                             "Total:",
                             style: TextStyle(
                               fontSize: 22,
@@ -148,7 +149,7 @@ class CartScreen extends StatelessWidget {
                             padding: const EdgeInsets.only(right: 12),
                             child: Text(
                               "$sum \$",
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Color.fromARGB(255, 5, 3, 30),
                                   fontFamily: "Cartoonist",
                                   fontSize: 20,
@@ -160,7 +161,7 @@ class CartScreen extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
+                          const Text(
                             "You use:",
                             style: TextStyle(
                               fontSize: 22,
@@ -175,13 +176,13 @@ class CartScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   "$tokensum ",
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Color.fromARGB(255, 5, 3, 30),
                                       fontFamily: "Cartoonist",
                                       fontSize: 20,
                                       fontWeight: FontWeight.w900),
                                 ),
-                                Container(
+                                SizedBox(
                                   height: 22,
                                   child: Image.asset("assets/coffeebean.png"),
                                 ),
@@ -190,15 +191,15 @@ class CartScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
-                      Container(
+                      SizedBox(
                         height: 36,
                         width: MediaQuery.of(context).size.width * 0.7,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color.fromARGB(255, 5, 3, 30),
+                            backgroundColor: const Color.fromARGB(255, 5, 3, 30),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30),
                             ),
@@ -217,12 +218,12 @@ class CartScreen extends StatelessWidget {
                                         dateTime: DateTime.now())
                                   ]);
                                 },
-                          child: Text(
+                          child: const Text(
                             "CHECK OUT",
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                     ],

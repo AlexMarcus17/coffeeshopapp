@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:coffeeshopapp/blocs/cart_bloc.dart';
 import 'package:coffeeshopapp/data/authrepo.dart';
 import 'package:coffeeshopapp/data/orderrepo.dart';

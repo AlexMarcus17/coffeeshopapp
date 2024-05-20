@@ -1,6 +1,7 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/order_bloc.dart';
@@ -41,22 +42,22 @@ class _OrderScreenState extends State<OrderScreen> {
               .isBefore(DateTime.now().subtract(Duration(days: removedays))));
         }
         return Scaffold(
-          backgroundColor: Color.fromARGB(255, 237, 201, 154),
+          backgroundColor: const Color.fromARGB(255, 237, 201, 154),
           appBar: PreferredSize(
-            preferredSize: Size.fromHeight(50),
+            preferredSize: const Size.fromHeight(50),
             child: AppBar(
-              backgroundColor: Color.fromARGB(0, 249, 153, 57),
+              backgroundColor: const Color.fromARGB(0, 249, 153, 57),
               elevation: 0,
               centerTitle: true,
               title: ShaderMask(
                 shaderCallback: (bounds) {
-                  return LinearGradient(colors: [
+                  return const LinearGradient(colors: [
                     Color.fromARGB(255, 123, 55, 30),
                     Color.fromARGB(255, 182, 118, 54),
                     Color.fromARGB(255, 155, 77, 0)
                   ]).createShader(bounds);
                 },
-                child: Text(
+                child: const Text(
                   "Mocha Moments",
                   style: TextStyle(
                       fontFamily: "Food Zone",
@@ -73,7 +74,7 @@ class _OrderScreenState extends State<OrderScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.only(
                           top: 8, left: 18, right: 12, bottom: 18),
                       child: Text(
@@ -87,10 +88,10 @@ class _OrderScreenState extends State<OrderScreen> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(
+                      padding: const EdgeInsets.only(
                           top: 8, left: 12, right: 18, bottom: 18),
                       child: Container(
-                        color: Color.fromARGB(255, 237, 201, 154),
+                        color: const Color.fromARGB(255, 237, 201, 154),
                         child: DropdownButton<int>(
                             iconEnabledColor: Colors.black,
                             focusColor: Colors.white,
@@ -122,16 +123,16 @@ class _OrderScreenState extends State<OrderScreen> {
                                   break;
                               }
                               return DropdownMenuItem(
+                                value: i,
                                 child: Text(
                                   e,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.w800,
                                     color: Colors.black,
                                     fontFamily: "Cartoonist",
                                   ),
                                 ),
-                                value: i,
                               );
                             }).toList(),
                             onChanged: ((value) => setState(() {

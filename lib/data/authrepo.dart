@@ -56,7 +56,6 @@ class AuthRepository {
       await _auth.currentUser?.delete();
       return true;
     } catch (e) {
-      print("failed to delete account");
       return false;
     }
   }

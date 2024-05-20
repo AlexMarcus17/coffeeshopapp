@@ -1,16 +1,14 @@
-import 'dart:convert';
 
-import 'package:bloc/bloc.dart';
-import 'package:coffeeshopapp/models/cartproduct.dart';
-import 'package:coffeeshopapp/widgets/cartitem.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:meta/meta.dart';
+
+import 'package:coffeeshopapp/models/cartproduct.dart';
 
 part 'cart_event.dart';
 part 'cart_state.dart';
 
 class CartBloc extends HydratedBloc<CartEvent, CartState> {
-  CartBloc() : super(CartList(list: [])) {
+  CartBloc() : super(CartList(list: const [])) {
     on<AddItem>((event, emit) {
       var list = (state as CartList).list;
       var newlist = [...list];
@@ -65,7 +63,7 @@ class CartBloc extends HydratedBloc<CartEvent, CartState> {
       emit(CartList(list: newlist));
     });
     on<PlaceOrder>((event, emit) {
-      emit(CartList(list: []));
+      emit(CartList(list: const []));
     });
   }
 

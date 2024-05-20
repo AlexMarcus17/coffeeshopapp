@@ -1,12 +1,12 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'dart:io';
 
 import 'package:coffeeshopapp/data/authrepo.dart';
 import 'package:coffeeshopapp/data/orderrepo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:get_it/get_it.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -28,14 +28,14 @@ class _SettingScreenState extends State<SettingScreen> {
       child: isLoading
           ? Center(
               child: Platform.isIOS
-                  ? CupertinoActivityIndicator(
+                  ? const CupertinoActivityIndicator(
                       radius: 20.0, color: CupertinoColors.activeBlue)
-                  : CircularProgressIndicator(),
+                  : const CircularProgressIndicator(),
             )
           : Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
+                const Padding(
                   padding:
                       EdgeInsets.only(top: 8, left: 18, right: 12, bottom: 18),
                   child: Text(
@@ -59,7 +59,7 @@ class _SettingScreenState extends State<SettingScreen> {
                             showGeneralDialog(
                                 barrierLabel: "",
                                 barrierDismissible: true,
-                                transitionDuration: Duration(milliseconds: 250),
+                                transitionDuration: const Duration(milliseconds: 250),
                                 transitionBuilder: (context, animation,
                                     secondaryAnimation, child) {
                                   Tween<Offset> tween;
@@ -78,11 +78,11 @@ class _SettingScreenState extends State<SettingScreen> {
                                 context: context,
                                 pageBuilder: (ctx, _, __) {
                                   return Container(
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                         color: Colors.amber,
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(30))),
-                                    margin: EdgeInsets.only(
+                                    margin: const EdgeInsets.only(
                                         top: 150,
                                         bottom: 220,
                                         left: 20,
@@ -98,7 +98,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.center,
                                             children: [
-                                              Text(
+                                              const Text(
                                                 "Username",
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.bold,
@@ -107,7 +107,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                                   fontSize: 16,
                                                 ),
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 4,
                                               ),
                                               Padding(
@@ -116,11 +116,11 @@ class _SettingScreenState extends State<SettingScreen> {
                                                         vertical: 8,
                                                         horizontal: 36),
                                                 child: TextField(
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 16,
                                                   ),
-                                                  decoration: InputDecoration(
+                                                  decoration: const InputDecoration(
                                                       hintText: "",
                                                       border:
                                                           OutlineInputBorder(),
@@ -128,7 +128,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                                           OutlineInputBorder(),
                                                       prefixIcon: Padding(
                                                         padding:
-                                                            const EdgeInsets
+                                                            EdgeInsets
                                                                 .symmetric(
                                                                 horizontal: 8),
                                                         child: Icon(Icons
@@ -138,7 +138,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                                       textEditingController,
                                                 ),
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 10,
                                               ),
                                               ElevatedButton(
@@ -169,7 +169,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                                       ScaffoldMessenger.of(
                                                               context)
                                                           .showSnackBar(
-                                                        SnackBar(
+                                                        const SnackBar(
                                                           content: Center(
                                                             child: Text(
                                                                 "Username changed"),
@@ -182,28 +182,28 @@ class _SettingScreenState extends State<SettingScreen> {
                                                     } catch (e) {}
                                                   }
                                                 },
-                                                child: Text(
-                                                  "Enter",
-                                                  style: TextStyle(
-                                                      fontSize: 18,
-                                                      fontFamily:
-                                                          "Coffee Crafts"),
-                                                ),
                                                 style: ElevatedButton.styleFrom(
                                                   shape: RoundedRectangleBorder(
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10.0),
                                                   ),
-                                                  padding: EdgeInsets.symmetric(
+                                                  padding: const EdgeInsets.symmetric(
                                                       horizontal: 15),
                                                   elevation: 30.0,
                                                   backgroundColor: Colors.brown,
                                                   shadowColor: Colors.amber,
                                                   foregroundColor: Colors.amber,
                                                 ),
+                                                child: const Text(
+                                                  "Enter",
+                                                  style: TextStyle(
+                                                      fontSize: 18,
+                                                      fontFamily:
+                                                          "Coffee Crafts"),
+                                                ),
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 90,
                                               )
                                             ]),
@@ -225,9 +225,9 @@ class _SettingScreenState extends State<SettingScreen> {
                               ),
                               elevation: 5,
                               color: Colors.white,
-                              child: Padding(
+                              child: const Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
+                                    EdgeInsets.symmetric(horizontal: 10),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -277,9 +277,9 @@ class _SettingScreenState extends State<SettingScreen> {
                               ),
                               elevation: 5,
                               color: Colors.white,
-                              child: Padding(
+                              child: const Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
+                                    EdgeInsets.symmetric(horizontal: 10),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -323,12 +323,12 @@ class _SettingScreenState extends State<SettingScreen> {
                               context: context,
                               builder: (BuildContext context) {
                                 return CupertinoAlertDialog(
-                                  title: Text('Are you sure?'),
-                                  content: Text(
+                                  title: const Text('Are you sure?'),
+                                  content: const Text(
                                       'If you log out, you will have to log in again.'),
                                   actions: <Widget>[
                                     TextButton(
-                                      child: Text(
+                                      child: const Text(
                                         'Cancel',
                                         style: TextStyle(color: Colors.brown),
                                       ),
@@ -337,7 +337,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                       },
                                     ),
                                     TextButton(
-                                      child: Text(
+                                      child: const Text(
                                         'Yes',
                                         style: TextStyle(color: Colors.brown),
                                       ),
@@ -374,9 +374,9 @@ class _SettingScreenState extends State<SettingScreen> {
                               ),
                               elevation: 5,
                               color: Colors.white,
-                              child: Padding(
+                              child: const Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
+                                    EdgeInsets.symmetric(horizontal: 10),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -421,7 +421,7 @@ class _SettingScreenState extends State<SettingScreen> {
                               context: context,
                               barrierLabel: "",
                               barrierDismissible: true,
-                              transitionDuration: Duration(milliseconds: 250),
+                              transitionDuration: const Duration(milliseconds: 250),
                               transitionBuilder: (context, animation,
                                   secondaryAnimation, child) {
                                 Tween<Offset> tween = Tween(
@@ -438,12 +438,12 @@ class _SettingScreenState extends State<SettingScreen> {
                               },
                               pageBuilder: (ctx, _, __) {
                                 return Container(
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                     color: Colors.amber,
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(30)),
                                   ),
-                                  margin: EdgeInsets.only(
+                                  margin: const EdgeInsets.only(
                                       top: 150,
                                       bottom: 220,
                                       left: 20,
@@ -459,7 +459,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         children: [
-                                          Text(
+                                          const Text(
                                             "Enter the password to delete your account",
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
@@ -468,21 +468,21 @@ class _SettingScreenState extends State<SettingScreen> {
                                               fontSize: 16,
                                             ),
                                           ),
-                                          SizedBox(height: 4),
+                                          const SizedBox(height: 4),
                                           Padding(
                                             padding: const EdgeInsets.symmetric(
                                                 vertical: 8, horizontal: 36),
                                             child: TextField(
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 16),
-                                              decoration: InputDecoration(
+                                              decoration: const InputDecoration(
                                                 hintText: "",
                                                 border: OutlineInputBorder(),
                                                 focusedBorder:
                                                     OutlineInputBorder(),
                                                 prefixIcon: Padding(
-                                                  padding: const EdgeInsets
+                                                  padding: EdgeInsets
                                                       .symmetric(horizontal: 8),
                                                   child: Icon(Icons
                                                       .account_circle_sharp),
@@ -491,33 +491,33 @@ class _SettingScreenState extends State<SettingScreen> {
                                               controller: passController,
                                             ),
                                           ),
-                                          SizedBox(height: 10),
+                                          const SizedBox(height: 10),
                                           ElevatedButton(
                                             onPressed: () {
                                               pass = passController.text;
                                               confirmDelete = true;
                                               Navigator.of(context).pop();
                                             },
-                                            child: Text(
-                                              "Enter",
-                                              style: TextStyle(
-                                                  fontSize: 18,
-                                                  fontFamily: "Coffee Crafts"),
-                                            ),
                                             style: ElevatedButton.styleFrom(
                                               shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
                                               ),
-                                              padding: EdgeInsets.symmetric(
+                                              padding: const EdgeInsets.symmetric(
                                                   horizontal: 15),
                                               elevation: 30.0,
                                               backgroundColor: Colors.brown,
                                               shadowColor: Colors.amber,
                                               foregroundColor: Colors.amber,
                                             ),
+                                            child: const Text(
+                                              "Enter",
+                                              style: TextStyle(
+                                                  fontSize: 18,
+                                                  fontFamily: "Coffee Crafts"),
+                                            ),
                                           ),
-                                          SizedBox(height: 90),
+                                          const SizedBox(height: 90),
                                         ],
                                       ),
                                     ),
@@ -531,12 +531,12 @@ class _SettingScreenState extends State<SettingScreen> {
                                 context: context,
                                 builder: (BuildContext context) {
                                   return CupertinoAlertDialog(
-                                    title: Text('Are you sure?'),
-                                    content: Text(
+                                    title: const Text('Are you sure?'),
+                                    content: const Text(
                                         'If you delete your account, all your data will be lost.'),
                                     actions: <Widget>[
                                       TextButton(
-                                        child: Text('Cancel',
+                                        child: const Text('Cancel',
                                             style:
                                                 TextStyle(color: Colors.brown)),
                                         onPressed: () {
@@ -544,7 +544,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                         },
                                       ),
                                       TextButton(
-                                        child: Text('Yes',
+                                        child: const Text('Yes',
                                             style:
                                                 TextStyle(color: Colors.brown)),
                                         onPressed: () {
@@ -601,9 +601,9 @@ class _SettingScreenState extends State<SettingScreen> {
                               ),
                               elevation: 5,
                               color: Colors.white,
-                              child: Padding(
+                              child: const Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
+                                    EdgeInsets.symmetric(horizontal: 10),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -663,10 +663,10 @@ class _SettingScreenState extends State<SettingScreen> {
                                       filterQuality: FilterQuality.high,
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 6,
                                   ),
-                                  Text(
+                                  const Text(
                                     "Show Only Vegan",
                                     style: TextStyle(
                                       fontSize: 20,
@@ -675,7 +675,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                       fontFamily: "Cartoonist",
                                     ),
                                   ),
-                                  Expanded(child: SizedBox()),
+                                  const Expanded(child: SizedBox()),
                                   Platform.isIOS
                                       ? CupertinoSwitch(
                                           activeColor: Colors.brown,
@@ -703,7 +703,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                                   .setBool("onlyvegan", val);
                                             });
                                           }),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 14,
                                   )
                                 ],
