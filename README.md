@@ -60,7 +60,7 @@ Mocha Moments is a dedicated app for a coffee shop, designed to enhance the cust
   - Order BLoC connects to Order Repository.
   - Order Repository interacts with Firestore and depends on Auth Repository.
  
-<img width="1086" alt="Screenshot 2024-05-22 at 13 19 19" src="https://github.com/AlexMarcus17/coffeeshopapp/assets/67654354/c58622e4-4636-4808-99b5-62bd7d9b15ad">
+![332908946-c58622e4-4636-4808-99b5-62bd7d9b15ad](https://github.com/user-attachments/assets/77f88967-abd1-467d-a9bd-200a2654b416)
 
 ## ⚙️ Configuration
 - **Firebase Setup**: To use the code, you need to generate the `firebase_options.dart` file using the FlutterFire CLI.
