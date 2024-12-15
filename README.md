@@ -49,7 +49,7 @@ Mocha Moments is a dedicated app for a coffee shop, designed to enhance the cust
   
 - **Menu and Gifts**:
   - Menu and Gifts screens connect to Menu Repository.
-  - Menu Repository interacts with Firestore (Firebase).
+  - Menu Repository holds Menu Data
 
 - **Cart**:
   - Cart screen uses Hydrated BLoC for state management.
