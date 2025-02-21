@@ -3,11 +3,6 @@
 
 Mocha Moments is a dedicated app for a coffee shop, designed to enhance the customer experience by allowing users to browse the menu, order products, and manage their accounts seamlessly. Built using Flutter, the app ensures smooth performance across both Android and iOS devices.
 
-## 🌟 Overview
-**Name**: Mocha Moments  
-**Purpose**: To provide a user-friendly interface for ordering coffee and snacks, claiming loyalty rewards, and managing user accounts.  
-**Target Audience**: Coffee enthusiasts who frequent the coffee shop.  
-**Unique Selling Proposition**: Comprehensive features for ordering and account management with a focus on user experience.
 
 ## 📋 Features
 1. **User Registration**:
@@ -32,8 +27,6 @@ Mocha Moments is a dedicated app for a coffee shop, designed to enhance the cust
    - View order history with filtering options (e.g., last week, last month).
    - Filter menu to show only vegan products.
   
-  ![IMG_7099](https://github.com/AlexMarcus17/coffeeshopapp/assets/67654354/93838851-a6dc-4628-89b1-39118eac894b)
-
 ## 🛠️ Tech Stack
 - **Development**: Flutter, Dart
 - **State Management**: BLoC, Hydrated BLoC
@@ -41,6 +34,9 @@ Mocha Moments is a dedicated app for a coffee shop, designed to enhance the cust
 - **Dependency Injection**: Get_it
 - **Backend and Authentication**: Firebase
 - **Testing**: Device_preview
+  
+  ![IMG_7099](https://github.com/AlexMarcus17/coffeeshopapp/assets/67654354/93838851-a6dc-4628-89b1-39118eac894b)
+
 
 ## 🏗️ Architecture
 - **Authentication**:
